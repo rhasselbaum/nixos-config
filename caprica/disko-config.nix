@@ -3,7 +3,7 @@
     disk = {
       root = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/nvme1n1";
         content = {
           type = "gpt";
           partitions = {
@@ -38,7 +38,7 @@
                     "/swap" = {
                       mountpoint = "/swap";
                       swap.swapfile.size = "64G";
-                      swap.swapfile.path = "swapfile"
+                      swap.swapfile.path = "swapfile";
                     };
                   };
                 };
@@ -49,7 +49,7 @@
       };
       aux = {
         type = "disk";
-        device = "/dev/nvme1n1";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
