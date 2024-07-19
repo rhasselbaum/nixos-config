@@ -47,4 +47,8 @@
       fi
     '';
   };
+
+  # KDEConnect
+  programs.kdeconnect.enable = true;
+
 }
