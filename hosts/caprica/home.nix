@@ -1,5 +1,5 @@
 # Home Manager config for rob
-{ config, pkgs, ... }:
+{ config, pkgs, common-homeenv, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
@@ -24,4 +24,13 @@
   home.file.".hello_home_manager".text = ''
     Yep, Home Manager is indeed working.
   '';
+
+  # Common home env repo, used for non-Nix, too.
+  home.file.".vimrc".source = "${common-homeenv}/.vimrc";
+  home.file.".gitconfig".source = "${common-homeenv}/.gitconfig";
+
+  # Only take certain Fish config, let the rest be defined on the host.
+  home.file.".config/fish/functions/fish_greeting.fish".source = "${common-homeenv}/.config/fish/functions/fish_greeting.fish";
+  home.file.".config/fish/functions/fish_prompt.fish".source = "${common-homeenv}/.config/fish/functions/fish_prompt.fish";
+  home.file.".config/fish/conf.d/abbrs.fish".source = "${common-homeenv}/.config/fish/conf.d/abbrs.fish";
 }

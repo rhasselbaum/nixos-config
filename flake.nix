@@ -3,13 +3,19 @@
   description = "Main Flake";
 
   inputs = {
-    # NixOS official package source
+    # NixOS official package source + Home Manager
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Common home env repo, used for non-Nix, too.
+    common-homeenv = {
+      url = "github:rhasselbaum/homeenv";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, common-homeenv, ... }@inputs: 
   let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -30,7 +36,11 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.rob = import ./hosts/caprica/home.nix;
+          home-manager.users.rob.imports = [ 
+            ({ config, ... }: import ./hosts/caprica/home.nix {
+              inherit config pkgs common-homeenv;
+            })
+          ];
         }
       ];
     };

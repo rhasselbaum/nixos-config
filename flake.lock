@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "common-homeenv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721499536,
+        "narHash": "sha256-EJfpzEydJdGQ1d9YiYQNQV9mEeOHvMFthmNarbCJGbw=",
+        "owner": "rhasselbaum",
+        "repo": "homeenv",
+        "rev": "96c018370df2f367e7575a4ada60e4bc638fd198",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rhasselbaum",
+        "repo": "homeenv",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -22,11 +38,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1720957393,
-        "narHash": "sha256-oedh2RwpjEa+TNxhg5Je9Ch6d3W1NKi7DbRO1ziHemA=",
+        "lastModified": 1721379653,
+        "narHash": "sha256-8MUgifkJ7lkZs3u99UDZMB4kbOxvMEXQZ31FO3SopZ0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "693bc46d169f5af9c992095736e82c3488bf7dbb",
+        "rev": "1d9c2c9b3e71b9ee663d11c5d298727dace8d374",
         "type": "github"
       },
       "original": {
@@ -38,6 +54,7 @@
     },
     "root": {
       "inputs": {
+        "common-homeenv": "common-homeenv",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }

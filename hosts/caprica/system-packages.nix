@@ -21,6 +21,7 @@
     passt # Network support for buildah
     signal-desktop
     vscode
+    zoom-us
   ];
   nixpkgs.config.allowUnfree = true;
 
