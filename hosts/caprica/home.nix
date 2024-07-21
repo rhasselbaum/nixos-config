@@ -58,6 +58,7 @@ in
     backup_dirs:
       - source: /home/rob
         includes:
+          - /home/rob/.ssh
           - /home/rob/bin
           - /home/rob/dev
           - /home/rob/Documents
