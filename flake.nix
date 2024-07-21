@@ -13,9 +13,13 @@
       url = "github:rhasselbaum/homeenv";
       flake = false;
     };
+
+    # Other local pkgs
+    duplicity-unattended.url = "path:pkgs/duplicity-unattended";
+    duplicity-unattended.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, common-homeenv, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, common-homeenv, duplicity-unattended, ... }@inputs: 
   let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -29,7 +33,9 @@
         ./hosts/caprica/configuration.nix
         ./hosts/caprica/network-and-virt.nix
         ./hosts/caprica/graphics-and-sound.nix
-        ./hosts/caprica/system-packages.nix
+        ({ config, lib, ... }: import ./hosts/caprica/system-packages.nix {
+          inherit config lib pkgs duplicity-unattended;
+        })
 
 	      # Home Manager
         home-manager.nixosModules.home-manager

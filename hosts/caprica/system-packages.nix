@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, duplicity-unattended, ... }:
 {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -22,6 +22,7 @@
     signal-desktop
     vscode
     zoom-us
+    duplicity-unattended.defaultPackage.x86_64-linux
   ];
   nixpkgs.config.allowUnfree = true;
 
