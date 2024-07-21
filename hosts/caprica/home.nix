@@ -1,6 +1,8 @@
 # Home Manager config for rob
-{ config, pkgs, common-homeenv, ... }:
-
+{ config, pkgs, inputs, ... }:
+let
+  common-homeenv = inputs.common-homeenv;
+in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

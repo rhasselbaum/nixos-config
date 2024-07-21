@@ -29,13 +29,12 @@
   {
     nixosConfigurations.caprica = nixpkgs.lib.nixosSystem {
       modules = [
+
 	      # Machine config
         ./hosts/caprica/configuration.nix
         ./hosts/caprica/network-and-virt.nix
         ./hosts/caprica/graphics-and-sound.nix
-        ({ config, lib, ... }: import ./hosts/caprica/system-packages.nix {
-          inherit config lib pkgs duplicity-unattended;
-        })
+        ./hosts/caprica/system-packages.nix
 
 	      # Home Manager
         home-manager.nixosModules.home-manager
@@ -44,9 +43,16 @@
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [ 
             ({ config, ... }: import ./hosts/caprica/home.nix {
-              inherit config pkgs common-homeenv;
+              inherit config pkgs inputs;
             })
           ];
+        }
+
+        # Set all inputs parameters as special arguments for all submodules,
+        # so we can directly use all dependencies in inputs in submodules.
+        # See https://shorturl.at/XiEdG
+        {
+          _module.args = { inherit inputs; };
         }
       ];
     };
