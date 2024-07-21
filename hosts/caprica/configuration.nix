@@ -61,6 +61,7 @@ in
   services.syncthing = {
     enable = true;
     user = "rob";
+    group = "users";
     dataDir = "/home/rob/Share";
     configDir = "/home/rob/.config/syncthing";
     overrideDevices = true;     # overrides any devices added or deleted through the WebUI

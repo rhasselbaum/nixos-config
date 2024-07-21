@@ -58,6 +58,7 @@ in
     backup_dirs:
       - source: /home/rob
         includes:
+          - /home/rob/bin
           - /home/rob/dev
           - /home/rob/Documents
           - /home/rob/nixos-config
