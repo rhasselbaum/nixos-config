@@ -26,7 +26,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-FaiaMjQ9OFkwAAuMp5xVOvE1t5N4wyDr1RgZp8fATqA=",
+        "narHash": "sha256-MnkclTeSG113VlKRACtFmUU8OabaMf9mWZwnenIvtKE=",
         "path": "pkgs/duplicity-unattended",
         "type": "path"
       },
@@ -38,11 +38,11 @@
     "duplicity-unattended-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1721561926,
-        "narHash": "sha256-apvBuYsbxnjvGog4uWBoLcq9YzvrD/czeiDT+m+g/rY=",
+        "lastModified": 1721584227,
+        "narHash": "sha256-CMisnK9r6lFwlWIx+nyybNnvuHroI4irUob6khxXH8Y=",
         "owner": "rhasselbaum",
         "repo": "duplicity-unattended",
-        "rev": "9628f9d60b070a37f7cf571454669f5e1b59fa93",
+        "rev": "d8cc59098c64d9effc84b7739f27cceb352943f1",
         "type": "github"
       },
       "original": {

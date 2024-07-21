@@ -22,6 +22,9 @@
     signal-desktop
     vscode
     zoom-us
+    # backups
+    duplicity
+    gnupg
     inputs.duplicity-unattended.defaultPackage.x86_64-linux
   ];
   nixpkgs.config.allowUnfree = true;
