@@ -3,19 +3,13 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 # Caprica config
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
-let
-  disko_module = builtins.fetchGit {
-    url = https://github.com/nix-community/disko.git;
-    rev = "786965e1b1ed3fd2018d78399984f461e2a44689";
-  };
-in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      "${disko_module}/module.nix"
+      "${inputs.disko}/module.nix"
       ./disk-config.nix
     ];
 
@@ -57,7 +51,7 @@ in
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
+  # Syncthing
   services.syncthing = {
     enable = true;
     user = "rob";
@@ -95,7 +89,6 @@ in
       };
     };
   };
-
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

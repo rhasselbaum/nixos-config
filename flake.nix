@@ -8,6 +8,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Disko
+    disko.url = "github:nix-community/disko";
+
     # Common home env repo, used for non-Nix, too.
     common-homeenv = {
       url = "github:rhasselbaum/homeenv";
@@ -19,11 +22,11 @@
     duplicity-unattended.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, common-homeenv, duplicity-unattended, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, common-homeenv, duplicity-unattended, ... }@inputs:
   let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
-      config.allowUnfree = true; 
+      config.allowUnfree = true;
     };
   in
   {
@@ -31,7 +34,9 @@
       modules = [
 
 	      # Machine config
-        ./hosts/caprica/configuration.nix
+        ({ config, lib, ... }: import ./hosts/caprica/configuration.nix {
+          inherit config lib pkgs inputs;
+        })
         ./hosts/caprica/network-and-virt.nix
         ./hosts/caprica/graphics-and-sound.nix
         ./hosts/caprica/system-packages.nix
@@ -41,7 +46,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.rob.imports = [ 
+          home-manager.users.rob.imports = [
             ({ config, ... }: import ./hosts/caprica/home.nix {
               inherit config pkgs inputs;
             })
