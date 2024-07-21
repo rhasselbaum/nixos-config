@@ -29,7 +29,7 @@ in
   # Only take certain Fish config, let the rest be defined on the host.
   home.file.".config/fish/functions/fish_greeting.fish".source = "${common-homeenv}/.config/fish/functions/fish_greeting.fish";
   home.file.".config/fish/functions/fish_prompt.fish".source = "${common-homeenv}/.config/fish/functions/fish_prompt.fish";
-  home.file.".config/fish/conf.d/abbrs.fish".source = "${common-homeenv}/.config/fish/conf.d/abbrs.fish";
+  home.file.".config/fish/conf.d".source = "${common-homeenv}/.config/fish/conf.d";
 
   # Duplicity backups. On new systems, you need to create ~/.duplicity-unattended/aws_credentials and import your GPG key.
   # Obviously not including those here.
