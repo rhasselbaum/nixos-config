@@ -58,6 +58,43 @@ in
   # };
 
   # List services that you want to enable:
+  services.syncthing = {
+    enable = true;
+    user = "rob";
+    dataDir = "/home/rob/Share";
+    configDir = "/home/rob/.config/syncthing";
+    overrideDevices = true;     # overrides any devices added or deleted through the WebUI
+    overrideFolders = true;     # overrides any folders added or deleted through the WebUI
+    settings = {
+      devices = {
+        "iris" = { id = "BKAPMSL-SQLG2YT-XKF4LQZ-SJE66PS-CXDN3FX-YMU2UEJ-XU4JFJY-7JNPTAL"; };
+        "scorpia" = { id = "KDMF7EZ-S3Z5FQQ-WVB5VPV-73KK7LZ-3ZGELJ2-46CCPOE-WPWF5FJ-ORALOQY"; };
+      };
+      folders = {
+        "Share" = {         # Name of folder in Syncthing, also the folder ID
+          path = "/home/rob/Share";
+          id = "ama4k-hnmhd";
+          devices = [ "iris" ];
+        };
+        "Commercial" = {
+          path = "/home/rob/Media/Commercial";
+          id = "xhvo7-czpwr";
+          devices = [ "iris" "scorpia" ];
+        };
+        "Photos" = {
+          path = "/home/rob/Media/Photos";
+          id = "ggjgv-w3jxr";
+          devices = [ "iris" "scorpia" ];
+        };
+        "Videos" = {
+          path = "/home/rob/Media/Videos";
+          id = "7c7kw-h9ktz";
+          devices = [ "iris" "scorpia" ];
+        };
+      };
+    };
+  };
+
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

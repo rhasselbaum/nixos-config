@@ -41,8 +41,15 @@ in
 
   # Open ports in the firewall.
   networking.firewall.trustedInterfaces = [ libvirt_sandbox_dev ]; # Allow traffic on the container sandbox bridge.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    22000 # Syncthing
+
+   ];
+  networking.firewall.allowedUDPPorts = [
+    22000 # Syncthing
+    21027 # Syncthing (discovery)
+   ];
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
