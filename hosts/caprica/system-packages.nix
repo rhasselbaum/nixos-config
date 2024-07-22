@@ -26,6 +26,7 @@
     duplicity
     gnupg
     inputs.duplicity-unattended.defaultPackage.x86_64-linux
+    awscli2
   ];
   nixpkgs.config.allowUnfree = true;
 

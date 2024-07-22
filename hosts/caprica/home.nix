@@ -2,12 +2,13 @@
 { config, pkgs, inputs, ... }:
 let
   common-homeenv = inputs.common-homeenv;
+  home-dir = "/home/rob";
 in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "rob";
-  home.homeDirectory = "/home/rob";
+  home.homeDirectory = home-dir;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -51,19 +52,19 @@ in
     remove_all_but_n_full: 3
 
     # Optional AWS config file with credentials.
-    aws_config_file: /home/rob/.duplicity-unattended/aws_credentials
+    aws_config_file: ${home-dir}/.duplicity-unattended/aws_credentials
 
     # Directories to be backed up. Each one consists of a source (absolute path) and optional lists of
     # include and exclude patterns in Duplicity format.
     backup_dirs:
-      - source: /home/rob
+      - source: ${home-dir}
         includes:
-          - /home/rob/.ssh
-          - /home/rob/bin
-          - /home/rob/dev
-          - /home/rob/Documents
-          - /home/rob/nixos-config
-          - /home/rob/Wallpaper
+          - ${home-dir}/.ssh
+          - ${home-dir}/bin
+          - ${home-dir}/dev
+          - ${home-dir}/Documents
+          - ${home-dir}/nixos-config
+          - ${home-dir}/Wallpaper
         excludes:
           - '**'
 
@@ -71,13 +72,14 @@ in
     cloud: aws
   '';
 
-  # Units for backups.
+  # User systemd units
   systemd.user = {
+    # Duplicity backups
     services.duplicity-unattended = {
       Unit.Description = "Unattended Duplicity backup";
       Service = {
         Type = "oneshot";
-        ExecStart = "${inputs.duplicity-unattended.defaultPackage.x86_64-linux}/bin/duplicity-unattended --config .duplicity-unattended/config.yaml";
+        ExecStart = "${inputs.duplicity-unattended.defaultPackage.x86_64-linux}/bin/duplicity-unattended --config ${home-dir}/.duplicity-unattended/config.yaml";
       };
     };
     timers.duplicity-unattended = {
@@ -89,5 +91,24 @@ in
       };
       Install.WantedBy = [ "timers.target" ];
     };
+
+    # Media sync from S3
+    services.media-sync-down = {
+      Unit.Description = "Sync media from S3 to local";
+      Service = {
+        Type = "oneshot";
+        ExecStart = "${home-dir}/bin/media-sync-down";
+      };
+    };
+    timers.media-sync-down = {
+      Unit.Description = "Run daily media sync from S3";
+      Timer = {
+        OnCalendar = "daily";
+        Persistent = true;
+        RandomizedDelaySec = "20min";
+      };
+      Install.WantedBy = [ "timers.target" ];
+    };
   };
+
 }
