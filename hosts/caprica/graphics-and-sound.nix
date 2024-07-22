@@ -34,9 +34,13 @@
   hardware.nvidia-container-toolkit.enable = true;
 
   # Pipewire for sound
+  security.rtkit.enable = true; # Used to acquire realtime priority if needed
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
 }

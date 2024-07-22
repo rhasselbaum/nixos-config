@@ -19,7 +19,7 @@
 
   # Hello, my name is...
   networking.hostName = "caprica";
- 
+
   # Enable Flakes support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -42,6 +42,10 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
