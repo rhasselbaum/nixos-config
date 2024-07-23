@@ -41,7 +41,13 @@
   };
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
+  # Local printer discovery.
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
