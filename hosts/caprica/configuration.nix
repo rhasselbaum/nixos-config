@@ -100,6 +100,13 @@
     };
   };
 
+  # Nix Store garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 60d";
+  };
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 

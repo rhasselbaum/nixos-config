@@ -29,6 +29,7 @@
     awscli2
     vlc
     wireguard-tools
+    gimp
   ];
   nixpkgs.config.allowUnfree = true;
 
