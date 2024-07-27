@@ -1,10 +1,11 @@
 # Network and virtualization for personal PC
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   libvirt_nat_bridge_dev = "virbr0";
   libvirt_sandbox_dev = "sandbox0";
   wireguard_icecast_dev = "wg0";
+  nixvirt = inputs.nixvirt;
 in
 {
   # Pick only one of the below networking options.
@@ -23,9 +24,38 @@ in
     };
   };
 
-  # Libvirt + QEMU + KVM
-  virtualisation.libvirtd = {
+  # Libvirt + QEMU + KVM with NixVirt
+  virtualisation.libvirt = {
     enable = true;
+    connections."qemu:///system" = {
+      networks = [
+        {
+          definition = nixvirt.lib.network.writeXML (nixvirt.lib.network.templates.bridge {
+            name = "default";
+            uuid = "cda3b7dd-71fd-44e3-8093-340f47a88c83";
+            subnet_byte = 122;
+            bridge_name = libvirt_nat_bridge_dev;
+          });
+          active = true;
+        }
+        {
+          definition = nixvirt.lib.network.writeXML {
+            name = "sandbox";
+            uuid = "703c2b85-da03-4e42-84d7-c57663ea14e7";
+            bridge.name = libvirt_sandbox_dev;
+            ip = {
+              address = "192.168.123.1";
+              netmask = "255.255.255.0";
+              dhcp.range = { start = "192.168.123.2"; end = "192.168.123.254"; };
+            };
+          };
+          active = true;
+        }
+      ];
+    };
+  };
+
+  virtualisation.libvirtd = {
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true; # Doesn't actually run as root because of overriding config below.
@@ -72,7 +102,6 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # TODO: Generate libvirt bridge configs via Nix.
   # TODO: Generate containers-host-only Podman bridge config via Nix.
   # TODO: Validate that my user is part of libvirtd group.
 

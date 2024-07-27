@@ -17,12 +17,16 @@
       flake = false;
     };
 
+    # Flake for defining libvirt domains and networks
+    nixvirt.url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
+    nixvirt.inputs.nixpkgs.follows = "nixpkgs";
+
     # Other local pkgs
     duplicity-unattended.url = "path:pkgs/duplicity-unattended";
     duplicity-unattended.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, common-homeenv, duplicity-unattended, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, common-homeenv, duplicity-unattended, nixvirt, ... }@inputs:
   let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -37,6 +41,7 @@
         ({ config, lib, ... }: import ./hosts/caprica/configuration.nix {
           inherit config lib pkgs inputs;
         })
+        nixvirt.nixosModules.default # Make NixVirt options available to other modules
         ./hosts/caprica/network-and-virt.nix
         ./hosts/caprica/graphics-and-sound.nix
         ./hosts/caprica/system-packages.nix
