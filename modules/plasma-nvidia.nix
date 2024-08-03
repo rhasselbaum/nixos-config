@@ -1,6 +1,7 @@
 # Plasma, Wayland, and NVIDIA, basically
 { config, lib, pkgs, ... }:
 {
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -31,7 +32,7 @@
   };
 
   # Enable GPU support in containers
-  hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit.enable = config.virtualisation.containers.enable;
 
   # Pipewire for sound
   security.rtkit.enable = true; # Used to acquire realtime priority if needed

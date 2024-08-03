@@ -43,7 +43,7 @@
         })
         nixvirt.nixosModules.default # Make NixVirt options available to other modules
         ./hosts/caprica/network-and-virt.nix
-        ./hosts/caprica/graphics-and-sound.nix
+        ./modules/plasma-nvidia.nix
         ./hosts/caprica/system-packages.nix
 
 	      # Home Manager
