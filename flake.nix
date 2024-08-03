@@ -66,5 +66,43 @@
         }
       ];
     };
+
+    nixosConfigurations.iris = nixpkgs.lib.nixosSystem {
+      modules = [
+
+        # Machine config
+        ({ config, lib, ... }: import ./hosts/iris/configuration.nix {
+          inherit config lib pkgs inputs;
+        })
+        ./hosts/iris/network-and-virt.nix
+        ./modules/plasma-nvidia.nix
+        ./hosts/iris/system-packages.nix
+
+        # Home Manager
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.rob.imports = [
+            ({ config, ... }: import ./hosts/iris/home-rob.nix {
+              inherit config pkgs inputs;
+            })
+          ];
+          home-manager.users.amy.imports = [
+            ({ config, ... }: import ./hosts/iris/home-amy.nix {
+              inherit config pkgs inputs;
+            })
+          ];
+        }
+
+        # Set all inputs parameters as special arguments for all submodules,
+        # so we can directly use all dependencies in inputs in submodules.
+        # See https://shorturl.at/XiEdG
+        {
+          _module.args = { inherit inputs; };
+        }
+      ];
+    };
+
   };
 }

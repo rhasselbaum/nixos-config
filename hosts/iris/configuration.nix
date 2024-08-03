@@ -2,11 +2,10 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-# Caprica config
+# Iris config
 { config, lib, pkgs, inputs, ... }:
 let
-  home-dir = "/home/rob";
-  username = "rob";
+  home-dir = "/home/amy";
 in
 {
   imports =
@@ -21,7 +20,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Hello, my name is...
-  networking.hostName = "caprica";
+  networking.hostName = "iris";
 
   # Enable Flakes support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -35,13 +34,19 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${username}" = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiKBoPbtPBg6B950S/qLaun1Tm028cStkk+bQWKLXjq0O6gMpgSXl7kCLIA7NXpwM28zFZM/mfCnpNwuo3b5L6i4/YYDMLfItUWzXEfDaHrOJR7/8NeNX/2P02qs/4f+OwYz0NZrjJm9QqfH77h6Gx21swk3Fw80B1S7Ldwk4i1BksbuKlENB1XixVlmQ06xrXJ9MLwaI3MGzvp9kMq78L7RmbAkxh2yRub1nYyLxKRKOkzTlCdlpVWshBOC5bxkKTLDanNtRwMwjGHEXCKBvulokZ7Ax/pP7pEY1y8YywXOEvLvSv0bByCrflPnVTHdT64OSRrGoWUxlKKKeaN+xx robhas"
-    ];
+  # Define user accounts.
+  users.users = {
+    amy = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+    };
+    rob = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      openssh.authorizedKeys.keys = [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDVklqPIhhFfoGuTU6hnur2sT8RHUZ5i4KZhmgevBl8Tzc/hcrDYUjylS2LCJbWeMyhldCDjgLjqIAj+X/azYHqT1sRa+xRfx50Q76FX3OxWsmGiYk/u/JRbBw226FpB474gjQkSXPGyjSM4gJB9wfc2nWj8riTa4cPuImMACdDoqFNxIiVWX+nJ9d+YWztOja6spFnP/KoFblfmPvm4tjS6R6OlajRhveeZSmiRrq/GbkOD8HbeXffGltVF8CSf1C1SIuCYZ+p4h7xkYbPyVGQyXfuLDLusWr0+H+1j7uhUT4XCwg3lQCScyGDhhwlTQRwFd7/MxqvED4Q03+I9zqtMeZ6mOHo1/LrncBEJcMVqSfC5tFS4nhvwo6IjhS7TzLkvh5CwAN3/63rNXSivFrfItPWOfE3mkOI7iNFacJqbXNdht+R3jaWYGUh6uCzmn/0YwJ7yuvm1I3Tbpf6A57TJX7RAHI0pU+F81m58xsmHNJQm9QSbPs6W8OPZadkD/Id8JZPkEy7ktdfOy1TzDVZMnGC+JkumYkB2yFF36xu909vPtLZ/Ncu7ffCcPpx9GCsP6KKpWqNTrD4teNta6jn2VKREuxz3Vk5nfJRp8WgBBla/1kUse8tw3LykMiQS6f8uFGb7459dBeDFnbg6ifM9TtYVW31PiKpJgf5z2pWUw== rob@caprica"
+      ];
+    };
   };
 
   # Enable CUPS to print documents.
@@ -71,7 +76,7 @@ in
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
-      AllowUsers = [username];
+      AllowUsers = ["rob"];
       PermitRootLogin = "no";
     };
   };
@@ -79,7 +84,7 @@ in
   # Syncthing
   services.syncthing = {
     enable = true;
-    user = username;
+    user = "amy";
     group = "users";
     dataDir = "${home-dir}/Share";
     configDir = "${home-dir}/.config/syncthing";
@@ -87,40 +92,32 @@ in
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI
     settings = {
       devices = {
-        "iris" = { id = "BKAPMSL-SQLG2YT-XKF4LQZ-SJE66PS-CXDN3FX-YMU2UEJ-XU4JFJY-7JNPTAL"; };
+        "caprica" = { id = "HAINGKT-RK4NGP4-H4QXJ3O-X6UQRGE-IKOV6SH-R7BYHLM-W6UHWET-ORQOJAM"; };
         "scorpia" = { id = "KDMF7EZ-S3Z5FQQ-WVB5VPV-73KK7LZ-3ZGELJ2-46CCPOE-WPWF5FJ-ORALOQY"; };
       };
       folders = {
         "Share" = {
           path = "${home-dir}/Share";
           id = "ama4k-hnmhd";
-          devices = [ "iris" ];
+          devices = [ "caprica" ];
         };
         "Commercial" = {
           path = "${home-dir}/Media/Commercial";
           id = "xhvo7-czpwr";
-          devices = [ "iris" "scorpia" ];
+          devices = [ "caprica" "scorpia" ];
         };
         "Photos" = {
           path = "${home-dir}/Media/Photos";
           id = "ggjgv-w3jxr";
-          devices = [ "iris" "scorpia" ];
+          devices = [ "caprica" "scorpia" ];
         };
         "Videos" = {
           path = "${home-dir}/Media/Videos";
           id = "7c7kw-h9ktz";
-          devices = [ "iris" "scorpia" ];
+          devices = [ "caprica" "scorpia" ];
         };
       };
     };
-  };
-
-  # Sunshine
-  services.sunshine = {
-    enable = true;
-    autoStart = false;
-    capSysAdmin = true;
-    openFirewall = true;
   };
 
   # Nix Store garbage collection
