@@ -4,7 +4,10 @@
 
 # Caprica config
 { config, lib, pkgs, inputs, ... }:
-
+let
+  home-dir = "/home/rob";
+  username = "rob";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -33,7 +36,7 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.rob = {
+  users.users."${username}" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" ];
     openssh.authorizedKeys.keys = [
@@ -68,7 +71,7 @@
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
-      AllowUsers = ["rob"];
+      AllowUsers = [username];
       PermitRootLogin = "no";
     };
   };
@@ -76,10 +79,10 @@
   # Syncthing
   services.syncthing = {
     enable = true;
-    user = "rob";
+    user = username;
     group = "users";
-    dataDir = "/home/rob/Share";
-    configDir = "/home/rob/.config/syncthing";
+    dataDir = "${home-dir}/Share";
+    configDir = "${home-dir}/.config/syncthing";
     overrideDevices = true;     # overrides any devices added or deleted through the WebUI
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI
     settings = {
@@ -89,22 +92,22 @@
       };
       folders = {
         "Share" = {         # Name of folder in Syncthing, also the folder ID
-          path = "/home/rob/Share";
+          path = "${home-dir}/Share";
           id = "ama4k-hnmhd";
           devices = [ "iris" ];
         };
         "Commercial" = {
-          path = "/home/rob/Media/Commercial";
+          path = "${home-dir}/Media/Commercial";
           id = "xhvo7-czpwr";
           devices = [ "iris" "scorpia" ];
         };
         "Photos" = {
-          path = "/home/rob/Media/Photos";
+          path = "${home-dir}/Media/Photos";
           id = "ggjgv-w3jxr";
           devices = [ "iris" "scorpia" ];
         };
         "Videos" = {
-          path = "/home/rob/Media/Videos";
+          path = "${home-dir}/Media/Videos";
           id = "7c7kw-h9ktz";
           devices = [ "iris" "scorpia" ];
         };
