@@ -100,6 +100,14 @@
     };
   };
 
+  # Sunshine
+  services.sunshine = {
+    enable = true;
+    autoStart = false;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
   # Nix Store garbage collection
   nix.gc = {
     automatic = true;
