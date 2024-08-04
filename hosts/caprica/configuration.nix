@@ -87,7 +87,7 @@ in
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI
     settings = {
       devices = {
-        "iris" = { id = "BKAPMSL-SQLG2YT-XKF4LQZ-SJE66PS-CXDN3FX-YMU2UEJ-XU4JFJY-7JNPTAL"; };
+        "iris" = { id = "KDMF7EZ-S3Z5FQQ-WVB5VPV-73KK7LZ-3ZGELJ2-46CCPOE-WPWF5FJ-ORALOQY"; };
         "scorpia" = { id = "KDMF7EZ-S3Z5FQQ-WVB5VPV-73KK7LZ-3ZGELJ2-46CCPOE-WPWF5FJ-ORALOQY"; };
       };
       folders = {
