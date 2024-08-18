@@ -22,13 +22,14 @@
     signal-desktop
     vscode
     zoom-us
-    # backups
     duplicity
     gnupg
     inputs.duplicity-unattended.defaultPackage.x86_64-linux
     awscli2
     vlc
     gimp
+    pavucontrol
+    helvum
   ];
   nixpkgs.config.allowUnfree = true;
 

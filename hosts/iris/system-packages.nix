@@ -11,7 +11,6 @@
     qt5.qtwayland # Needed for Vivaldi at least
     signal-desktop
     zoom-us
-    # backups
     duplicity
     gnupg
     inputs.duplicity-unattended.defaultPackage.x86_64-linux
@@ -21,6 +20,7 @@
     libreoffice-qt
     hunspell
     hunspellDicts.en_US
+    pavucontrol
   ];
   nixpkgs.config.allowUnfree = true;
 
