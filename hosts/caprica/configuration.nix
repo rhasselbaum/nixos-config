@@ -123,6 +123,30 @@ in
     openFirewall = true;
   };
 
+  # Icecast
+  services.icecast = {
+    enable = true;
+    hostname = "localhost";
+    listen.address = "127.0.0.1";
+    listen.port = 25080;
+    admin.password = "not_on_the_internet";
+    extraConf = ''
+      <listen-socket>
+          <port>25443</port>
+          <ssl>1</ssl>
+      </listen-socket>
+
+      <mount type="default">
+          <public>0</public>
+          <max-listener-duration>7200</max-listener-duration>
+      </mount>
+
+      <authentication>
+        <source-password>not_on_the_internet</source-password>
+      </authentication>
+    '';
+  };
+
   # Nix Store garbage collection
   nix.gc = {
     automatic = true;

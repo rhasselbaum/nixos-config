@@ -9,7 +9,6 @@
   networking.firewall.allowedTCPPorts = [
     22    # SSH
     22000 # Syncthing
-
    ];
   networking.firewall.allowedUDPPorts = [
     22000 # Syncthing

@@ -74,7 +74,7 @@ in
   networking.firewall.allowedTCPPorts = [
     22    # SSH
     22000 # Syncthing
-
+    25443 # Icecast
    ];
   networking.firewall.allowedUDPPorts = [
     22000 # Syncthing
