@@ -104,5 +104,35 @@
       ];
     };
 
+    nixosConfigurations.aquaria = nixpkgs.lib.nixosSystem {
+      modules = [
+
+        # Machine config
+        ({ config, lib, ... }: import ./hosts/aquaria/configuration.nix {
+          inherit config lib pkgs inputs;
+        })
+        ./hosts/aquaria/system-packages.nix
+
+        # Home Manager
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.rob.imports = [
+            ({ config, ... }: import ./hosts/aquaria/home.nix {
+              inherit config pkgs inputs;
+            })
+          ];
+        }
+
+        # Set all inputs parameters as special arguments for all submodules,
+        # so we can directly use all dependencies in inputs in submodules.
+        # See https://shorturl.at/XiEdG
+        {
+          _module.args = { inherit inputs; };
+        }
+      ];
+    };
+
   };
 }
