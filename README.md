@@ -2,7 +2,7 @@ My NixOS configurations. Perhaps some will find it useful.
 
 #### Basic steps for bootstrapping a new host
 
-Boot into live medium, then, if using Disko (not Raspbeery Pi image):
+Boot into live medium, then, if using Disko (not Raspberry Pi / ARM image):
 
 ```bash
 cd /tmp
