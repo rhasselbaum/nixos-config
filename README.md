@@ -14,6 +14,12 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
 You should see partitions mounted under `/mnt` after this. Then:
 
 ```bash
+sudo nixos-generate-config --no-filesystems --root /mnt
+```
+
+Copy the generated `hardware-configuration.nix` into the repo if needed and push it to Github. Then:
+
+```bash
 sudo git clone https://github.com/rhasselbaum/nixos-config.git /mnt/etc/nixos
 cd /mnt/etc/nixos
 sudo nixos-install --flake /mnt/etc/nixos/flake.nix#<host>
