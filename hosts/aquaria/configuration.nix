@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-# Caprica config
+# Aquaria config
 { config, lib, pkgs, inputs, ... }:
 let
   home-dir = "/home/rob";
@@ -14,10 +14,20 @@ in
       ./hardware-configuration.nix
     ];
 
-  # Use the extlinux boot loader for Raspberry Pi.
-  boot.loader.grub.enable = false;
-  # Enables the generation of /boot/extlinux/extlinux.conf
-  boot.loader.generic-extlinux-compatible.enable = true;
+  # Enable audio devices
+  boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" "snd_bcm2835.enable_headphones=1" ];
+  boot.loader = {
+    # Use the extlinux boot loader for Raspberry Pi
+    grub.enable = false;
+    generic-extlinux-compatible.enable = true;
+
+    # Enable onboard audio; ensure use of headphone jack instead of HDMI
+    raspberryPi.firmwareConfig = ''
+      dtparam=audio=on
+      hdmi_ignore_edid_audio=1
+    '';
+  };
+
 
   # Hello, my name is...
   networking.hostName = "aquaria";

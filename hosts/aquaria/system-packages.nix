@@ -5,6 +5,9 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    alsa-utils
+    mplayer
+    pulsemixer
   ];
   nixpkgs.config.allowUnfree = true;
 
