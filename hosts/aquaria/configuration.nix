@@ -14,26 +14,22 @@ in
       ./hardware-configuration.nix
     ];
 
-  # Enable audio devices
-  boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" "snd_bcm2835.enable_headphones=1" ];
-  boot.loader = {
-    # Use the extlinux boot loader for Raspberry Pi
-    grub.enable = false;
-    generic-extlinux-compatible.enable = true;
-
-    # Enable onboard audio; ensure use of headphone jack instead of HDMI
-    raspberryPi.firmwareConfig = ''
-      dtparam=audio=on
-      hdmi_ignore_edid_audio=1
-    '';
-  };
-
+  # Use the extlinux boot loader for Raspberry Pi
+  boot.loader.grub.enable = false;
+  boot.loader.generic-extlinux-compatible.enable = true;
 
   # Hello, my name is...
   networking.hostName = "aquaria";
 
   # Enable Flakes support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Enable audio devices
+  boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" "snd_bcm2835.enable_headphones=1" ];
+  boot.loader.raspberryPi.firmwareConfig = ''
+    dtparam=audio=on
+    hdmi_ignore_edid_audio=1
+  '';
 
   # Set your time zone.
   time.timeZone = "America/New_York";
