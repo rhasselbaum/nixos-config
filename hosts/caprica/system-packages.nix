@@ -16,7 +16,7 @@
     firefox
     qt5.qtwayland # Needed for Vivaldi at least
     qemu
-    python3
+    (python3.withPackages (p: with p; [ black ]))
     buildah
     passt # Network support for buildah
     signal-desktop
