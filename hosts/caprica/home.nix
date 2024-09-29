@@ -109,6 +109,22 @@ in
       };
       Install.WantedBy = [ "timers.target" ];
     };
+
+    # Snapcast
+    services.snapcast-sync = {
+      Unit = {
+        Description = "Send PipeWire audio to Snapcast";
+        BindsTo = [ "pipewire.service" ];
+        After = [ "pipewire.service" ];
+      };
+      Install = {
+        WantedBy = [ "pipewire.service" ];
+      };
+      Service = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.pulseaudio}/bin/pactl load-module module-pipe-sink file=/run/snapserver/dispatch sink_name=Snapcast format=s16le rate=48000";
+      };
+    };
   };
 
 }

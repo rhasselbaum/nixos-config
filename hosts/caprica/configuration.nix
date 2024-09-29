@@ -116,6 +116,19 @@ in
     };
   };
 
+  # Snapcast
+  services.snapserver = {
+    enable = true;
+    openFirewall = true;
+    codec = "flac";
+    streams = {
+      dispatch  = {
+        type = "pipe";
+        location = "/run/snapserver/dispatch";
+      };
+    };
+  };
+
   # Sunshine
   services.sunshine = {
     enable = true;
