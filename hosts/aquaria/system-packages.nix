@@ -16,7 +16,7 @@
     (pkgs.writeShellScriptBin "snapclient-caprica" ''
       #usr/bin/env bash
       sleep 5  # avoid auddio setup race condition after login
-      ${pkgs.snapcast}/bin/snapclient -h caprica -p 1704
+      ${pkgs.snapcast}/bin/snapclient -h caprica -p 1704 -s Headphones
     '')
     tmux
   ];
