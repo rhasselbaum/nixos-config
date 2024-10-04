@@ -32,6 +32,8 @@ in
 
   # Basic networking
   networking.networkmanager.enable = true;
+  # Don't use onboard wifi. Drops too much. Prefer wifi dongle.
+  networking.networkmanager.unmanaged = [ "wlan0" ];
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
