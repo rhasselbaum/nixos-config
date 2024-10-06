@@ -136,7 +136,7 @@
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
-      <source file='/VMs/home-assistant.qcow2' index='1'/>
+      <source file='/var/lib/libvirt/images/home-assistant.qcow2' index='1'/>
       <backingStore/>
       <target dev='hda' bus='ide'/>
       <alias name='ide0-0-0'/>

@@ -3,26 +3,30 @@
 
 let
   nixvirt = inputs.nixvirt;
+  libvirt_bridge_dev = "br0";
+  eth_dev = "enp0s25";
 in
 {
   # Pick only one of the below networking options.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.unmanaged = [ libvirt_bridge_dev eth_dev ];
 
   # Libvirt + QEMU + KVM with NixVirt
   virtualisation.libvirt = {
     enable = true;
     connections."qemu:///system" = {
       domains = [
-        {
-          definition = ./libvirt/home-assistant-domain.xml;
-          active = true;
-        }
+        # Follow https://www.home-assistant.io/installation/linux for setup
       ];
     };
   };
-
   virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
   programs.virt-manager.enable = true;
+
+  # Bridge for directly connecting VMs
+  networking.interfaces."${libvirt_bridge_dev}".useDHCP = true;
+  networking.interfaces."${eth_dev}".useDHCP = true;
+  networking.bridges."${libvirt_bridge_dev}".interfaces = [ eth_dev ];
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
