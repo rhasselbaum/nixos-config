@@ -21,7 +21,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Hello, my name is...
-  networking.hostName = "caprica";
+  networking.hostName = "scorpia";
 
   # Enable Flakes support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -40,24 +40,9 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" ];
     openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiKBoPbtPBg6B950S/qLaun1Tm028cStkk+bQWKLXjq0O6gMpgSXl7kCLIA7NXpwM28zFZM/mfCnpNwuo3b5L6i4/YYDMLfItUWzXEfDaHrOJR7/8NeNX/2P02qs/4f+OwYz0NZrjJm9QqfH77h6Gx21swk3Fw80B1S7Ldwk4i1BksbuKlENB1XixVlmQ06xrXJ9MLwaI3MGzvp9kMq78L7RmbAkxh2yRub1nYyLxKRKOkzTlCdlpVWshBOC5bxkKTLDanNtRwMwjGHEXCKBvulokZ7Ax/pP7pEY1y8YywXOEvLvSv0bByCrflPnVTHdT64OSRrGoWUxlKKKeaN+xx robhas"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB3+j1wFgcmxlwh5IXyc8nPOrm9hciaKEDhQkzt5ERWS JuiceSSH"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMSiqnK63GY16iC+FhRseDksjdfOXx20lUECYdXzUjq rob@scorpia"
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDVklqPIhhFfoGuTU6hnur2sT8RHUZ5i4KZhmgevBl8Tzc/hcrDYUjylS2LCJbWeMyhldCDjgLjqIAj+X/azYHqT1sRa+xRfx50Q76FX3OxWsmGiYk/u/JRbBw226FpB474gjQkSXPGyjSM4gJB9wfc2nWj8riTa4cPuImMACdDoqFNxIiVWX+nJ9d+YWztOja6spFnP/KoFblfmPvm4tjS6R6OlajRhveeZSmiRrq/GbkOD8HbeXffGltVF8CSf1C1SIuCYZ+p4h7xkYbPyVGQyXfuLDLusWr0+H+1j7uhUT4XCwg3lQCScyGDhhwlTQRwFd7/MxqvED4Q03+I9zqtMeZ6mOHo1/LrncBEJcMVqSfC5tFS4nhvwo6IjhS7TzLkvh5CwAN3/63rNXSivFrfItPWOfE3mkOI7iNFacJqbXNdht+R3jaWYGUh6uCzmn/0YwJ7yuvm1I3Tbpf6A57TJX7RAHI0pU+F81m58xsmHNJQm9QSbPs6W8OPZadkD/Id8JZPkEy7ktdfOy1TzDVZMnGC+JkumYkB2yFF36xu909vPtLZ/Ncu7ffCcPpx9GCsP6KKpWqNTrD4teNta6jn2VKREuxz3Vk5nfJRp8WgBBla/1kUse8tw3LykMiQS6f8uFGb7459dBeDFnbg6ifM9TtYVW31PiKpJgf5z2pWUw== rob@caprica"
     ];
   };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  # Local printer discovery.
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-
-  # Bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -90,52 +75,32 @@ in
     settings = {
       devices = {
         "iris" = { id = "VQ2GDTP-R4RSCSB-YVIOX5S-2NIBS76-GJ4G2UJ-DY2XSK3-EKR55K5-V6EDQAZ"; };
-        "scorpia" = { id = "KDMF7EZ-S3Z5FQQ-WVB5VPV-73KK7LZ-3ZGELJ2-46CCPOE-WPWF5FJ-ORALOQY"; };
+        "caprica" = { id = "HAINGKT-RK4NGP4-H4QXJ3O-X6UQRGE-IKOV6SH-R7BYHLM-W6UHWET-ORQOJAM"; };
       };
       folders = {
-        "Share" = {
-          path = "${home-dir}/Share";
-          id = "ama4k-hnmhd";
-          devices = [ "iris" ];
-        };
         "Commercial" = {
           path = "${home-dir}/Media/Commercial";
           id = "xhvo7-czpwr";
-          devices = [ "iris" "scorpia" ];
+          devices = [ "iris" "caprica" ];
         };
         "Photos" = {
           path = "${home-dir}/Media/Photos";
           id = "ggjgv-w3jxr";
-          devices = [ "iris" "scorpia" ];
+          devices = [ "iris" "caprica" ];
         };
         "Videos" = {
           path = "${home-dir}/Media/Videos";
           id = "7c7kw-h9ktz";
-          devices = [ "iris" "scorpia" ];
+          devices = [ "iris" "caprica" ];
         };
       };
     };
   };
 
-  # Snapcast
-  services.snapserver = {
-    enable = true;
-    openFirewall = true;
-    codec = "flac";
-    streams = {
-      dispatch  = {
-        type = "pipe";
-        location = "/run/snapserver/dispatch";
-      };
-    };
-  };
-
-  # Sunshine
-  services.sunshine = {
-    enable = true;
-    autoStart = false;
-    capSysAdmin = true;
-    openFirewall = true;
+  # Auto login to Plasma
+  services.displayManager = {
+	  autoLogin.enable = true;
+	  autoLogin.user = username;
   };
 
   # Nix Store garbage collection
