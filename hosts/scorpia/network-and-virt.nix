@@ -14,11 +14,7 @@ in
   # Libvirt + QEMU + KVM with NixVirt
   virtualisation.libvirt = {
     enable = true;
-    connections."qemu:///system" = {
-      domains = [
-        # Follow https://www.home-assistant.io/installation/linux for setup
-      ];
-    };
+    # Follow https://www.home-assistant.io/installation/linux for setup
   };
   virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
   programs.virt-manager.enable = true;
