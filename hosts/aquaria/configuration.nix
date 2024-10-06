@@ -32,8 +32,8 @@ in
 
   # Basic networking
   networking.networkmanager.enable = true;
-  # Don't use onboard wifi. Drops too much. Prefer wifi dongle.
-  networking.networkmanager.unmanaged = [ "wlan0" ];
+  # Powersasve causes host to be unreachable on wifi after some time.
+  networking.networkmanager.wifi.powersave = false;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
