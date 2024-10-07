@@ -139,6 +139,12 @@ in
     openFirewall = true;
   };
 
+  # Auto login to Plasma
+  services.displayManager = {
+	  autoLogin.enable = true;
+	  autoLogin.user = username;
+  };
+
   # Nix Store garbage collection
   nix.gc = {
     automatic = true;
