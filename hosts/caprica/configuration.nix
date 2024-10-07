@@ -120,6 +120,7 @@ in
   # Snapcast
   services.snapserver = {
     enable = true;
+    buffer = 2000;
     openFirewall = true;
     codec = "flac";
     streams = {
