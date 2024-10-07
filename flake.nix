@@ -52,7 +52,10 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./hosts/caprica/home.nix {
+            ({ config, ... }: import ./modules/home-rob-minimal.nix {
+              inherit config pkgs inputs;
+            })
+            ({ config, ... }: import ./hosts/caprica/home-rob-extended.nix {
               inherit config pkgs inputs;
             })
           ];
@@ -84,7 +87,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./hosts/iris/home-rob.nix {
+            ({ config, ... }: import ./modules/home-rob-minimal.nix {
               inherit config pkgs inputs;
             })
           ];
@@ -119,7 +122,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./hosts/aquaria/home.nix {
+            ({ config, ... }: import ./modules/home-rob-minimal.nix {
               inherit config pkgs inputs;
             })
           ];
@@ -152,7 +155,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./hosts/scorpia/home.nix {
+            ({ config, ... }: import ./modules/home-rob-minimal.nix {
               inherit config pkgs inputs;
             })
           ];
