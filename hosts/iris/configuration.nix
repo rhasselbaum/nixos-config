@@ -93,7 +93,7 @@ in
     settings = {
       devices = {
         "caprica" = { id = "HAINGKT-RK4NGP4-H4QXJ3O-X6UQRGE-IKOV6SH-R7BYHLM-W6UHWET-ORQOJAM"; };
-        "scorpia" = { id = "KDMF7EZ-S3Z5FQQ-WVB5VPV-73KK7LZ-3ZGELJ2-46CCPOE-WPWF5FJ-ORALOQY"; };
+        "scorpia" = { id = "LFPMCYX-7BA2OH5-3TCQF2S-Y3M4YUK-VVRY453-Q3R7POC-NQGKUTG-JAGYVQG"; };
       };
       folders = {
         "Share" = {
