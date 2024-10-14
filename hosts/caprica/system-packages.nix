@@ -39,6 +39,7 @@
     libreoffice-qt
     hunspell
     hunspellDicts.en_US
+    jetbrains.pycharm-community
   ];
   nixpkgs.config.allowUnfree = true;
 
