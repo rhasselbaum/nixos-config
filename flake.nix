@@ -170,5 +170,37 @@
       ];
     };
 
+    nixosConfigurations.dad-desktop = nixpkgs.lib.nixosSystem {
+      modules = [
+
+        # Machine config
+        ({ config, lib, ... }: import ./hosts/dad-desktop/configuration.nix {
+          inherit config lib pkgs inputs;
+        })
+        ./hosts/dad-desktop/network-and-virt.nix
+        ./modules/plasma-kerneldrv.nix
+        ./hosts/dad-desktop/system-packages.nix
+
+        # Home Manager
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.rob.imports = [
+            ({ config, ... }: import ./modules/home-rob-minimal.nix {
+              inherit config pkgs inputs;
+            })
+          ];
+        }
+
+        # Set all inputs parameters as special arguments for all submodules,
+        # so we can directly use all dependencies in inputs in submodules.
+        # See https://shorturl.at/XiEdG
+        {
+          _module.args = { inherit inputs; };
+        }
+      ];
+    };
+
   };
 }
