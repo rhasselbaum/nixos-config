@@ -21,7 +21,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Hello, my name is...
-  networking.hostName = "rob-desktop";
+  networking.hostName = "dad-desktop";
 
   # Enable Flakes support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
