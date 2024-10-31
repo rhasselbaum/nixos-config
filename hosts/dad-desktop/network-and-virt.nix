@@ -35,7 +35,7 @@ in
   networking.firewall.allowedTCPPorts = [
     22    # SSH
     22000 # Syncthing
-    3389  # Plasma remote desktop
+    # 3389  # Plasma remote desktop -- or use SSH tunnel
    ];
   networking.firewall.allowedUDPPorts = [
     22000 # Syncthing

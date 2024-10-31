@@ -41,6 +41,7 @@
     hunspellDicts.en_US
     jetbrains.pycharm-community
     wireguard-tools
+    kdePackages.krdc
   ];
   nixpkgs.config.allowUnfree = true;
 
