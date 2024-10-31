@@ -6,6 +6,7 @@
 { config, lib, pkgs, inputs, ... }:
 let
   home-dir = "/home/rob";
+  username = "rob";
 in
 {
   imports =
@@ -61,6 +62,12 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  # Auto login to Plasma
+  services.displayManager = {
+	  autoLogin.enable = true;
+	  autoLogin.user = username;
+  };
 
   # SSH
   services.openssh = {
