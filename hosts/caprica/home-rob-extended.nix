@@ -38,6 +38,8 @@ in
           - ${home-dir}/Documents
           - ${home-dir}/nixos-config
           - ${home-dir}/Wallpaper
+          - ${home-dir}/.wireguard
+          - ${home-dir}/.ssh
         excludes:
           - '**'
 

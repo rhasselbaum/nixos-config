@@ -40,6 +40,7 @@
     hunspell
     hunspellDicts.en_US
     jetbrains.pycharm-community
+    wireguard-tools
   ];
   nixpkgs.config.allowUnfree = true;
 

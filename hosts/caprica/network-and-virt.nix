@@ -4,13 +4,15 @@
 let
   libvirt_nat_bridge_dev = "virbr0";
   libvirt_sandbox_dev = "sandbox0";
+  parents_wireguard_dev = "wg0";
   nixvirt = inputs.nixvirt;
+  home-dir = "/home/rob";
 in
 {
   # Pick only one of the below networking options.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  # Don't try to manage the libvirt bridges.
-  networking.networkmanager.unmanaged = [ libvirt_nat_bridge_dev libvirt_sandbox_dev ];
+  # Don't try to manage the libvirt bridges or wireguard.
+  networking.networkmanager.unmanaged = [ libvirt_nat_bridge_dev libvirt_sandbox_dev parents_wireguard_dev ];
 
   # Podman
   virtualisation = {
@@ -69,6 +71,20 @@ in
   };
   programs.virt-manager.enable = true;
 
+  # Wireguard for VPN to Mom & Dad's place.
+  networking.wireguard.interfaces."${parents_wireguard_dev}" = {
+    ips = [ "192.168.124.1/24" ];
+    listenPort = 3955;
+    privateKeyFile = "${home-dir}/.wireguard/private.key";
+    peers = [
+      {
+        # Dad's PC
+        publicKey = "mqCIXjMQMYJUXIvKGQxlfXOajIvXDKnRsd1REIvQS3U=";
+        allowedIPs = [ "192.168.124.2/32" ];
+      }
+    ];
+  };
+
   # Open ports in the firewall.
   networking.firewall.trustedInterfaces = [ libvirt_sandbox_dev ]; # Allow traffic on the container sandbox bridge.
   networking.firewall.allowedTCPPorts = [
@@ -78,6 +94,7 @@ in
   networking.firewall.allowedUDPPorts = [
     22000 # Syncthing
     21027 # Syncthing (discovery)
+    3955  # Wireguard
    ];
 
   # Or disable the firewall altogether.
