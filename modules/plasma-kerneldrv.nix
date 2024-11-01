@@ -1,4 +1,4 @@
-# Plasma, Wayland, and Intel, basically
+# Plasma, Wayland, and Intel or AMD, basically.
 { config, lib, pkgs, ... }:
 {
 

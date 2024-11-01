@@ -146,7 +146,7 @@
         })
         nixvirt.nixosModules.default # Make NixVirt options available to other modules
         ./hosts/scorpia/network-and-virt.nix
-        ./modules/plasma-intel.nix
+        ./modules/plasma-kerneldrv.nix
         ./hosts/scorpia/system-packages.nix
 
 	      # Home Manager
