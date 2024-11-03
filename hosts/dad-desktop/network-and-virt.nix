@@ -11,22 +11,29 @@ in
   networking.networkmanager.unmanaged = [ wireguard_dev ];
 
   # Wireguard for VPN to Caprica.
-  networking.wireguard.interfaces."${wireguard_dev}" = {
+  networking.wireguard.interfaces."${wireguard_dev}" =
+  let
+    publicKey = "m4L3U4/TLceIjAq7BKqKh1GGzHjF0OWOPaGFdELUx1M=";
+  in
+  {
     ips = [ "192.168.124.2/24" ];
     listenPort = 3955; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
     privateKeyFile = "${home-dir}/.wireguard/private.key";
+    postSetup = ["wg set ${wireguard_dev} peer ${publicKey} persistent-keepalive 25"];
     peers = [
       {
+        inherit publicKey;
+
         # Caprica
-        publicKey = "m4L3U4/TLceIjAq7BKqKh1GGzHjF0OWOPaGFdELUx1M=";
         allowedIPs = [ "192.168.124.1/32" ];
 
         # Server public IP and port.
         endpoint = "heritage.dyn.hasselbaum.net:3955";
 
-        # Send keepalives every 25 seconds. Important to keep NAT tables alive.
-        persistentKeepalive = 25;
+        # Use postSetup instead of this setting because otherwise it doesn't auto
+        # connect to the peer when using a private key file. See https://wiki.nixos.org/wiki/WireGuard
+        #persistentKeepalive = 25;
       }
     ];
   };
