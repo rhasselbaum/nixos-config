@@ -15,6 +15,7 @@
     hunspell
     hunspellDicts.en_US
     pavucontrol
+    zulu17
   ];
   nixpkgs.config.allowUnfree = true;
 
