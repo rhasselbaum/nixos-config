@@ -16,7 +16,7 @@
     hunspellDicts.en_US
     pavucontrol
     flatpak
-    gnome.gnome-software  # for Flatpak GUI installers
+    gnome-software  # for Flatpak GUI installers
   ];
   nixpkgs.config.allowUnfree = true;
 
