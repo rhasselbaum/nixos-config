@@ -90,6 +90,24 @@ in
     '';
   };
 
+  # Auto-update Flatpak apps periodically
+  systemd.services.flatpak-updates = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = "flatpak update -y";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
+  systemd.timers.flatpak-updates = {
+    wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "weekly";
+        Persistent = true;
+      };
+  };
+
   # Syncthing
   services.syncthing = {
     enable = true;
