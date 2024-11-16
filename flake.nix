@@ -21,9 +21,11 @@
     nixvirt.url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
     nixvirt.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Other local pkgs
+    # Other pkgs
     duplicity-unattended.url = "path:pkgs/duplicity-unattended";
     duplicity-unattended.inputs.nixpkgs.follows = "nixpkgs";
+    mqtt-launcher.url = "github:rhasselbaum/mqtt-launcher/flake";
+    mqtt-launcher.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, common-homeenv, duplicity-unattended, nixvirt, ... }@inputs:
@@ -57,6 +59,9 @@
             })
             ({ config, ... }: import ./hosts/caprica/home-rob-extended.nix {
               inherit config pkgs inputs;
+            })
+            ({ config, osConfig, ... }: import ./modules/home-rob-mqtt-launcher.nix {
+              inherit config pkgs inputs osConfig;
             })
           ];
         }
