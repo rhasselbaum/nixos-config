@@ -42,6 +42,8 @@
     jetbrains.pycharm-community
     wireguard-tools
     kdePackages.krdc
+    yt-dlp
+    mplayer
   ];
   nixpkgs.config.allowUnfree = true;
 
