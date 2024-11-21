@@ -5,6 +5,8 @@ let
   home-dir = "/home/rob";
 in
 {
+  # User systemd units
+  systemd.user = {
     services.snapcast-caprica = {
       Unit = {
         Description = "Snapcast client of Caprica";
@@ -16,7 +18,7 @@ in
         Restart = "no";
         ExecStart = ''
           ${pkgs.coreutils}/bin/timeout --preserve-status 250m \
-            ${pkgs.snapcast}/bin/snapclient -h caprica -p 1704 -s Headphones
+            ${pkgs.snapcast}/bin/snapclient -h caprica -p 1704
         '';
       };
     };
