@@ -100,11 +100,7 @@ in
         ExecStart = "${pkgs.pulseaudio}/bin/pactl load-module module-pipe-sink file=/run/snapserver/dispatch sink_name=Snapcast format=s16le rate=48000";
       };
     };
-    services.pw-snapcast-link =
-    let
-      snapcast-tools-pkg = inputs.snapcast-tools.defaultPackage."${pkgs.system}";
-    in
-    {
+    services.pw-snapcast-link = {
       Unit = {
         Description = "Pipewire-Snapcast Link";
         Requires = [ "snapcast-sink.service" ];

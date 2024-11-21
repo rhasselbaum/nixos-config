@@ -13,11 +13,6 @@
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
     snapcast
-    (pkgs.writeShellScriptBin "snapclient-caprica" ''
-      #usr/bin/env bash
-      sleep 5  # avoid auddio setup race condition after login
-      ${pkgs.snapcast}/bin/snapclient -h caprica -p 1704 -s Headphones
-    '')
     tmux
   ];
   nixpkgs.config.allowUnfree = true;

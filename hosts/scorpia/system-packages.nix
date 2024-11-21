@@ -13,11 +13,6 @@
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
     snapcast
-    (pkgs.writeShellScriptBin "snapclient-caprica" ''
-      #usr/bin/env bash
-      sleep 5  # avoid auddio setup race condition after login
-      ${pkgs.snapcast}/bin/snapclient -h caprica -p 1704
-    '')
     tmux
     # Weird Vivaldi stuff needed for Plasma Wayland. See https://github.com/NixOS/nixpkgs/pull/292148
     # Also, go to vivaldi://flags and set Ozone to Wayland. See https://discuss.kde.org/t/plasma-6-and-screen-flickering-in-vivaldi/10999

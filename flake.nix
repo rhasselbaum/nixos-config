@@ -132,6 +132,9 @@
             ({ config, ... }: import ./modules/home-rob-minimal.nix {
               inherit config pkgs inputs;
             })
+            ({ config, ... }: import ./modules/home-rob-snapcast-client.nix {
+              inherit config pkgs inputs;
+            })
           ];
         }
 
@@ -163,6 +166,9 @@
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
             ({ config, ... }: import ./modules/home-rob-minimal.nix {
+              inherit config pkgs inputs;
+            })
+            ({ config, ... }: import ./modules/home-rob-snapcast-client.nix {
               inherit config pkgs inputs;
             })
           ];
