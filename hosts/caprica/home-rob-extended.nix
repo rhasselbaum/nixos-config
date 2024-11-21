@@ -86,9 +86,9 @@ in
     };
 
     # Snapcast
-    services.snapcast-sync = {
+    services.snapcast-sink = {
       Unit = {
-        Description = "Send PipeWire audio to Snapcast";
+        Description = "Snapcast Sink";
         BindsTo = [ "pipewire.service" ];
         After = [ "pipewire.service" ];
       };
@@ -98,6 +98,25 @@ in
       Service = {
         Type = "oneshot";
         ExecStart = "${pkgs.pulseaudio}/bin/pactl load-module module-pipe-sink file=/run/snapserver/dispatch sink_name=Snapcast format=s16le rate=48000";
+      };
+    };
+    services.pw-snapcast-link =
+    let
+      snapcast-tools-pkg = inputs.snapcast-tools.defaultPackage."${pkgs.system}";
+    in
+    {
+      Unit = {
+        Description = "Pipewire-Snapcast Link";
+        Requires = [ "snapcast-sink.service" ];
+        After = [ "snapcast-sink.service" ];
+      };
+      Service = {
+        Type = "exec";
+        Restart = "no";
+        ExecStart = ''
+          ${pkgs.coreutils}/bin/timeout --preserve-status 250m \
+            ${inputs.snapcast-tools.defaultPackage.${pkgs.system}}/bin/pw-snapcast-link
+        '';
       };
     };
   };

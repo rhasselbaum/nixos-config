@@ -60,7 +60,7 @@ in
   # User systemd units
   systemd.user.services.mqtt-launcher = {
     Unit = {
-      Description = "MQTT command l   auncher";
+      Description = "MQTT command launcher";
       After = "network.target";
     };
     Service = {

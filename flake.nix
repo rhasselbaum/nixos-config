@@ -26,9 +26,11 @@
     duplicity-unattended.inputs.nixpkgs.follows = "nixpkgs";
     mqtt-launcher.url = "github:rhasselbaum/mqtt-launcher/flake";
     mqtt-launcher.inputs.nixpkgs.follows = "nixpkgs";
+    snapcast-tools.url = "github:rhasselbaum/snapcast-tools";
+    snapcast-tools.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, common-homeenv, duplicity-unattended, nixvirt, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvirt, ... }@inputs:
   let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
