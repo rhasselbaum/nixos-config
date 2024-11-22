@@ -31,21 +31,15 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nixvirt, ... }@inputs:
-  let
-    pkgs = import nixpkgs {
-      system = "x86_64-linux";
-      config.allowUnfree = true;
-    };
-  in
   {
     nixosConfigurations.caprica = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [
 
-	      # Machine config
-        ({ config, lib, ... }: import ./hosts/caprica/configuration.nix {
-          inherit config lib pkgs inputs;
-        })
         nixvirt.nixosModules.default # Make NixVirt options available to other modules
+
+	      # Machine config
+        ./hosts/caprica/configuration.nix
         ./hosts/caprica/network-and-virt.nix
         ./modules/plasma-nvidia.nix
         ./hosts/caprica/system-packages.nix
@@ -53,26 +47,14 @@
 	      # Home Manager
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./modules/home-rob-minimal.nix {
-              inherit config pkgs inputs;
-            })
-            ({ config, ... }: import ./hosts/caprica/home-rob-extended.nix {
-              inherit config pkgs inputs;
-            })
-            ({ config, osConfig, ... }: import ./modules/home-rob-mqtt-launcher.nix {
-              inherit config pkgs inputs osConfig;
-            })
+            ./modules/home-rob-minimal.nix
+            ./hosts/caprica/home-rob-extended.nix
+            ./modules/home-rob-mqtt-launcher.nix
           ];
-        }
-
-        # Set all inputs parameters as special arguments for all submodules,
-        # so we can directly use all dependencies in inputs in submodules.
-        # See https://shorturl.at/XiEdG
-        {
-          _module.args = { inherit inputs; };
         }
       ];
     };
@@ -81,9 +63,7 @@
       modules = [
 
         # Machine config
-        ({ config, lib, ... }: import ./hosts/iris/configuration.nix {
-          inherit config lib pkgs inputs;
-        })
+        ./hosts/iris/configuration.nix
         ./hosts/iris/network-and-virt.nix
         ./modules/plasma-nvidia.nix
         ./hosts/iris/system-packages.nix
@@ -91,25 +71,15 @@
         # Home Manager
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./modules/home-rob-minimal.nix {
-              inherit config pkgs inputs;
-            })
+            ./modules/home-rob-minimal.nix
           ];
           home-manager.users.amy.imports = [
-            ({ config, ... }: import ./hosts/iris/home-amy.nix {
-              inherit config pkgs inputs;
-            })
+            ./hosts/iris/home-amy.nix
           ];
-        }
-
-        # Set all inputs parameters as special arguments for all submodules,
-        # so we can directly use all dependencies in inputs in submodules.
-        # See https://shorturl.at/XiEdG
-        {
-          _module.args = { inherit inputs; };
         }
       ];
     };
@@ -118,31 +88,19 @@
       modules = [
 
         # Machine config
-        ({ config, lib, ... }: import ./hosts/aquaria/configuration.nix {
-          inherit config lib pkgs inputs;
-        })
+        ./hosts/aquaria/configuration.nix
         ./hosts/aquaria/system-packages.nix
 
         # Home Manager
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./modules/home-rob-minimal.nix {
-              inherit config pkgs inputs;
-            })
-            ({ config, ... }: import ./modules/home-rob-snapcast-client.nix {
-              inherit config pkgs inputs;
-            })
+            ./modules/home-rob-minimal.nix
+            ./modules/home-rob-snapcast-client.nix
           ];
-        }
-
-        # Set all inputs parameters as special arguments for all submodules,
-        # so we can directly use all dependencies in inputs in submodules.
-        # See https://shorturl.at/XiEdG
-        {
-          _module.args = { inherit inputs; };
         }
       ];
     };
@@ -150,11 +108,10 @@
     nixosConfigurations.scorpia = nixpkgs.lib.nixosSystem {
       modules = [
 
-	      # Machine config
-        ({ config, lib, ... }: import ./hosts/scorpia/configuration.nix {
-          inherit config lib pkgs inputs;
-        })
         nixvirt.nixosModules.default # Make NixVirt options available to other modules
+
+	      # Machine config
+        ./hosts/scorpia/configuration.nix
         ./hosts/scorpia/network-and-virt.nix
         ./modules/plasma-kerneldrv.nix
         ./hosts/scorpia/system-packages.nix
@@ -162,23 +119,13 @@
 	      # Home Manager
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./modules/home-rob-minimal.nix {
-              inherit config pkgs inputs;
-            })
-            ({ config, ... }: import ./modules/home-rob-snapcast-client.nix {
-              inherit config pkgs inputs;
-            })
+            ./modules/home-rob-minimal.nix
+            ./modules/home-rob-snapcast-client.nix
           ];
-        }
-
-        # Set all inputs parameters as special arguments for all submodules,
-        # so we can directly use all dependencies in inputs in submodules.
-        # See https://shorturl.at/XiEdG
-        {
-          _module.args = { inherit inputs; };
         }
       ];
     };
@@ -187,9 +134,7 @@
       modules = [
 
         # Machine config
-        ({ config, lib, ... }: import ./hosts/dad-desktop/configuration.nix {
-          inherit config lib pkgs inputs;
-        })
+        ./hosts/dad-desktop/configuration.nix
         ./hosts/dad-desktop/network-and-virt.nix
         ./modules/plasma-kerneldrv.nix
         ./hosts/dad-desktop/system-packages.nix
@@ -197,23 +142,14 @@
         # Home Manager
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.rob.imports = [
-            ({ config, ... }: import ./modules/home-rob-minimal.nix {
-              inherit config pkgs inputs;
-            })
+            ./modules/home-rob-minimal.nix
           ];
-        }
-
-        # Set all inputs parameters as special arguments for all submodules,
-        # so we can directly use all dependencies in inputs in submodules.
-        # See https://shorturl.at/XiEdG
-        {
-          _module.args = { inherit inputs; };
         }
       ];
     };
-
   };
 }
