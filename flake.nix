@@ -60,6 +60,7 @@
     };
 
     nixosConfigurations.iris = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [
 
         # Machine config
@@ -85,6 +86,7 @@
     };
 
     nixosConfigurations.aquaria = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [
 
         # Machine config
@@ -106,6 +108,7 @@
     };
 
     nixosConfigurations.scorpia = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [
 
         nixvirt.nixosModules.default # Make NixVirt options available to other modules
@@ -131,6 +134,7 @@
     };
 
     nixosConfigurations.dad-desktop = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [
 
         # Machine config
