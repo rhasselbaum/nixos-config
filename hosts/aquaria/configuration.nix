@@ -42,10 +42,10 @@ in
 
   # Enable audio devices
   boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" "snd_bcm2835.enable_headphones=1" ];
-  boot.loader.raspberryPi.firmwareConfig = ''
-    dtparam=audio=on
-    hdmi_ignore_edid_audio=1
-  '';
+  # boot.loader.raspberryPi.firmwareConfig = ''
+  #   dtparam=audio=on
+  #   hdmi_ignore_edid_audio=1
+  # '';
 
   # Pipewire for sound
   security.rtkit.enable = true; # Used to acquire realtime priority if needed
