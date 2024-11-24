@@ -25,9 +25,6 @@ in
         "prog/pwd"          :   {
                                     None            :   [ 'pwd' ],
                                 },
-        "dev/1"             :   {
-                                    None            :   [ 'ls', '/', '-l' ],
-                                },
     }
   '';
 

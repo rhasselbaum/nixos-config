@@ -116,5 +116,14 @@ in
       };
     };
   };
-
+  # Link/unlink Pipewire default audio output device monitor to Snapcast.
+  home.file.".mqtt-launcher/launcher.conf.d/20-topics".text = ''
+    topiclist = {
+        # topic                     payload value       program & arguments
+        "home-audio/snapcast/main-bedroom/stream-control": {
+          "start": [ 'systemctl', '--user', 'start', 'pw-snapcast-link.service' ],
+          "stop": [ 'systemctl', '--user', 'stop', 'pw-snapcast-link.service' ],
+        },
+    }
+  '';
 }
