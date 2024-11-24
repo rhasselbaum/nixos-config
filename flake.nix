@@ -102,6 +102,7 @@
           home-manager.users.rob.imports = [
             ./modules/home-rob-minimal.nix
             ./modules/home-rob-snapcast-client.nix
+            ./hosts/aquaria/home-rob-extended.nix
           ];
         }
       ];
@@ -128,6 +129,7 @@
           home-manager.users.rob.imports = [
             ./modules/home-rob-minimal.nix
             ./modules/home-rob-snapcast-client.nix
+            ./hosts/scorpia/home-rob-extended.nix
           ];
         }
       ];
