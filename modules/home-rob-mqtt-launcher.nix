@@ -58,6 +58,7 @@ in
   systemd.user.services.mqtt-launcher = {
     Unit = {
       Description = "MQTT command launcher";
+      After = "network.target";
     };
     Service = {
       Type = "exec";
@@ -67,7 +68,6 @@ in
     };
     Install = {
       WantedBy = [ "network.target" ];
-      After = [ "network.target" ];
     };
   };
 }
