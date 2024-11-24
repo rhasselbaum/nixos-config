@@ -58,7 +58,6 @@ in
   systemd.user.services.mqtt-launcher = {
     Unit = {
       Description = "MQTT command launcher";
-      After = "network.target";
     };
     Service = {
       Type = "exec";
@@ -66,6 +65,9 @@ in
       ExecStart = "${inputs.mqtt-launcher.defaultPackage.${pkgs.system}}/bin/mqtt-launcher";
       Restart= "always";
     };
-    Install.WantedBy = [ "multi-user.target" ];
+    Install = {
+      WantedBy = [ "network.target" ];
+      After = [ "network.target" ];
+    };
   };
 }
