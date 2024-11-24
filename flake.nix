@@ -103,6 +103,7 @@
             ./modules/home-rob-minimal.nix
             ./modules/home-rob-snapcast-client.nix
             ./hosts/aquaria/home-rob-extended.nix
+            ./modules/home-rob-mqtt-launcher.nix
           ];
         }
       ];
