@@ -3,13 +3,49 @@
 
 let
   nixvirt = inputs.nixvirt;
-  libvirt_bridge_dev = "br0";
+  bridge_dev = "br0";
   eth_dev = "enp0s25";
 in
 {
-  # Pick only one of the below networking options.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.networkmanager.unmanaged = [ libvirt_bridge_dev eth_dev ];
+  # Configure bridged networking for Home Assistant VM + physical Ethernet. We use
+  # systemd-networkd instead of the usual NetworkManager because the latter was leading
+  # to IP address conflicts even though all applicable interfaces were set as unmanaged.
+  # ¯\_(ツ)_/¯
+  # Adapted from https://github.com/NixOS/nixpkgs/issues/355450#issuecomment-2470860172
+  networking.useNetworkd = true;
+  systemd.network = {
+    enable = true;
+    netdevs = {
+      "30-${bridge_dev}" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = bridge_dev;
+          MACAddress = "none";
+        };
+      };
+    };
+    networks = {
+      # Define only the bridge and Physical NIC. libvirtd should add its NIC to the bridge.
+      "30-${eth_dev}" = {
+        name = eth_dev;
+        bridge = [ bridge_dev ];
+      };
+      "30-${bridge_dev}" = {
+        name = bridge_dev;
+        DHCP = "yes";
+      };
+    };
+    links = {
+      "30-${bridge_dev}" = {
+        matchConfig = {
+          OriginalName = bridge_dev;
+        };
+        linkConfig = {
+          MACAddressPolicy = "none";
+        };
+      };
+    };
+  };
 
   # Libvirt + QEMU + KVM with NixVirt
   virtualisation.libvirt = {
@@ -18,11 +54,6 @@ in
   };
   virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
   programs.virt-manager.enable = true;
-
-  # Bridge for directly connecting VMs
-  networking.interfaces."${libvirt_bridge_dev}".useDHCP = true;
-  networking.interfaces."${eth_dev}".useDHCP = true;
-  networking.bridges."${libvirt_bridge_dev}".interfaces = [ eth_dev ];
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
@@ -33,9 +64,6 @@ in
     22000 # Syncthing
     21027 # Syncthing (discovery)
    ];
-
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
 }
 
