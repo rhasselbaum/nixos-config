@@ -58,16 +58,17 @@ in
   systemd.user.services.mqtt-launcher = {
     Unit = {
       Description = "MQTT command launcher";
-      After = "network.target";
+      After = "default.target";
     };
     Service = {
       Type = "exec";
       Environment = "MQTTLAUNCHERCONFIG=${main-conf-file}";
       ExecStart = "${inputs.mqtt-launcher.defaultPackage.${pkgs.system}}/bin/mqtt-launcher";
-      Restart= "always";
+      Restart = "always";
+      RestartSec = "10s";
     };
     Install = {
-      WantedBy = [ "network.target" ];
+      WantedBy = [ "default.target" ];
     };
   };
 }
