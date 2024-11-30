@@ -9,7 +9,7 @@ in
     enable = mkEnableOption "Snapcast Caprica client";
     soundcard = mkOption {
       default = "";
-      type = types.string;
+      type = types.str;
       description = ''
         Sound device for output.
       '';
