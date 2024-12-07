@@ -14,6 +14,13 @@ in
         Sound device for output.
       '';
     };
+    latency = mkOption {
+      default = 0;
+      type = types.int;
+      description = ''
+        Device latency in milliseconds.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -29,7 +36,7 @@ in
           Restart = "no";
           ExecStart = ''
             ${pkgs.coreutils}/bin/timeout --preserve-status 250m \
-              ${pkgs.snapcast}/bin/snapclient -h caprica -p 1704${if cfg.soundcard != "" then " -s ${cfg.soundcard}" else ""}
+              ${pkgs.snapcast}/bin/snapclient -h caprica.hasselbaum.net -p 1704${if cfg.soundcard != "" then " -s ${cfg.soundcard}" else ""}${if cfg.latency != 0 then " --latency ${builtins.toString cfg.latency}" else ""}
           '';
         };
       };
