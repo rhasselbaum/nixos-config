@@ -116,6 +116,7 @@ in
       };
     };
   };
+
   # Link/unlink Pipewire default audio output device monitor to Snapcast.
   home.file.".mqtt-launcher/launcher.conf.d/20-topics".text = ''
     topiclist = {
@@ -126,4 +127,7 @@ in
         },
     }
   '';
+
+  # Also support the client for whole home audio.
+  programs.snapcast-caprica.enable = true;
 }
