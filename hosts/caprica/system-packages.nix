@@ -44,6 +44,7 @@
     kdePackages.krdc
     yt-dlp
     mplayer
+    kdenlive
   ];
   nixpkgs.config.allowUnfree = true;
 
