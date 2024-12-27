@@ -89,8 +89,6 @@ in
     services.pw-snapcast-link = {
       Unit = {
         Description = "Pipewire-Snapcast Link";
-        Requires = [ "snapcast-sink.service" ];
-        After = [ "snapcast-sink.service" ];
       };
       Service = {
         Type = "exec";
@@ -110,6 +108,10 @@ in
         "home-audio/snapcast/main-bedroom/stream-control": {
           "start": [ 'systemctl', '--user', 'start', 'pw-snapcast-link.service' ],
           "stop": [ 'systemctl', '--user', 'stop', 'pw-snapcast-link.service' ],
+        },
+        "home-audio/snapcast/downstairs/stream-control": {
+          "start": [ 'systemctl', '--user', 'start', 'snapcast-caprica.service' ],
+          "stop": [ 'systemctl', '--user', 'stop', 'snapcast-caprica.service' ],
         },
     }
   '';
