@@ -131,6 +131,25 @@ in
     };
   };
 
+  # Snapcast pipe sink for Pipewire
+  services.pipewire.extraConfig.pipewire = {
+    "60-snapcast-sink" = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-pipe-tunnel";
+          args = {
+              "node.name" = "Snapcast";
+              "tunnel.mode" = "sink";
+              "pipe.filename" = "/run/snapserver/dispatch";
+              "audio.format" = "S16LE";
+              "audio.rate" = 48000;
+              "audio.channels" = 2;
+          };
+        }
+      ];
+    };
+  };
+
   # Sunshine
   services.sunshine = {
     enable = true;

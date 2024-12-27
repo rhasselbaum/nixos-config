@@ -86,20 +86,6 @@ in
     };
 
     # Snapcast
-    services.snapcast-sink = {
-      Unit = {
-        Description = "Snapcast Sink";
-        BindsTo = [ "pipewire.service" ];
-        After = [ "pipewire.service" ];
-      };
-      Install = {
-        WantedBy = [ "pipewire.service" ];
-      };
-      Service = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.pulseaudio}/bin/pactl load-module module-pipe-sink file=/run/snapserver/dispatch sink_name=Snapcast format=s16le rate=48000";
-      };
-    };
     services.pw-snapcast-link = {
       Unit = {
         Description = "Pipewire-Snapcast Link";
