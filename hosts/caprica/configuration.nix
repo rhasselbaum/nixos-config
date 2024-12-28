@@ -144,6 +144,7 @@ in
               "audio.format" = "S16LE";
               "audio.rate" = 48000;
               "audio.channels" = 2;
+              "audio.position" = [ "FL" "FR" ];
           };
         }
       ];
