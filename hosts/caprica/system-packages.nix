@@ -44,6 +44,7 @@
     yt-dlp
     mplayer
     kdenlive
+    nmap
   ];
   nixpkgs.config.allowUnfree = true;
 
