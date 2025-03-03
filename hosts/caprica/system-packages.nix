@@ -45,6 +45,8 @@
     mplayer
     kdenlive
     nmap
+    openrazer-daemon
+    polychromatic
   ];
   nixpkgs.config.allowUnfree = true;
 

@@ -38,7 +38,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" ];
+    extraGroups = [ "wheel" "libvirtd" "openrazer" ];
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiKBoPbtPBg6B950S/qLaun1Tm028cStkk+bQWKLXjq0O6gMpgSXl7kCLIA7NXpwM28zFZM/mfCnpNwuo3b5L6i4/YYDMLfItUWzXEfDaHrOJR7/8NeNX/2P02qs/4f+OwYz0NZrjJm9QqfH77h6Gx21swk3Fw80B1S7Ldwk4i1BksbuKlENB1XixVlmQ06xrXJ9MLwaI3MGzvp9kMq78L7RmbAkxh2yRub1nYyLxKRKOkzTlCdlpVWshBOC5bxkKTLDanNtRwMwjGHEXCKBvulokZ7Ax/pP7pEY1y8YywXOEvLvSv0bByCrflPnVTHdT64OSRrGoWUxlKKKeaN+xx robhas"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB3+j1wFgcmxlwh5IXyc8nPOrm9hciaKEDhQkzt5ERWS JuiceSSH"
@@ -58,6 +58,9 @@ in
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
+  # Razer keyboard
+  hardware.openrazer.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
