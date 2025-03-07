@@ -43,7 +43,7 @@
     kdePackages.krdc
     yt-dlp
     mplayer
-    kdenlive
+    kdePackages.kdenlive
     nmap
     openrazer-daemon
     polychromatic
