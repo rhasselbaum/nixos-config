@@ -26,6 +26,8 @@
     duplicity-unattended.inputs.nixpkgs.follows = "nixpkgs";
     mqtt-launcher.url = "github:rhasselbaum/mqtt-launcher/flake";
     mqtt-launcher.inputs.nixpkgs.follows = "nixpkgs";
+    polychromatic-tools.url = "github:rhasselbaum/polychromatic-tools";
+    polychromatic-tools.inputs.nixpkgs.follows = "nixpkgs";
     snapcast-tools.url = "github:rhasselbaum/snapcast-tools";
     snapcast-tools.inputs.nixpkgs.follows = "nixpkgs";
   };

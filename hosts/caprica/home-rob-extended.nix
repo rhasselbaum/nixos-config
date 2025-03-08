@@ -99,6 +99,19 @@ in
         '';
       };
     };
+
+    # Polychromatic (OpenRazer) keyboard state restore
+    services.polychromatic-restore = {
+      Unit = {
+        Description = "Polychromatic Restore";
+      };
+      Service = {
+        Type = "exec";
+        Restart = "no";
+        ExecStart = "${inputs.polychromatic-tools.defaultPackage.${pkgs.system}}/bin/polychromatic-restore";
+      };
+      Install.WantedBy = [ "default.target" ];
+    };
   };
 
   # Link/unlink Pipewire default audio output device monitor to Snapcast.
