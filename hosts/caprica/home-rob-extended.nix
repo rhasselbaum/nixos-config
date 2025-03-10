@@ -104,13 +104,15 @@ in
     services.polychromatic-restore = {
       Unit = {
         Description = "Polychromatic Restore";
+        Before = [ "sleep.target" ];
+        After = [ "suspend.target" "hibernate.target" "hybrid-sleep.target" ];
       };
       Service = {
         Type = "exec";
         Restart = "no";
         ExecStart = "${inputs.polychromatic-tools.defaultPackage.${pkgs.system}}/bin/polychromatic-restore";
       };
-      Install.WantedBy = [ "default.target" ];
+      Install.WantedBy = [ "default.target" "suspend.target" "hibernate.target" "hybrid-sleep.target" ];
     };
   };
 
