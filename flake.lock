@@ -43,15 +43,14 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-efydoDFy9QCfOmnkHHpT4Lko5xU2WUCyfFi/lKR7cxY=",
         "path": "pkgs/duplicity-unattended",
         "type": "path"
       },
       "original": {
         "path": "pkgs/duplicity-unattended",
         "type": "path"
-      }
+      },
+      "parent": []
     },
     "duplicity-unattended-src": {
       "flake": false,
