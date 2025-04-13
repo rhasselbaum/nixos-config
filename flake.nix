@@ -41,6 +41,7 @@
         nixvirt.nixosModules.default # Make NixVirt options available to other modules
 
 	      # Machine config
+        ./modules/configuration-minimal.nix
         ./hosts/caprica/configuration.nix
         ./hosts/caprica/network-and-virt.nix
         ./modules/plasma-nvidia.nix
@@ -67,6 +68,7 @@
       modules = [
 
         # Machine config
+        ./modules/configuration-minimal.nix
         ./hosts/iris/configuration.nix
         ./hosts/iris/network-and-virt.nix
         ./modules/plasma-nvidia.nix
@@ -93,6 +95,7 @@
       modules = [
 
         # Machine config
+        ./modules/configuration-minimal.nix
         ./hosts/aquaria/configuration.nix
         ./hosts/aquaria/system-packages.nix
 
@@ -119,6 +122,7 @@
         nixvirt.nixosModules.default # Make NixVirt options available to other modules
 
 	      # Machine config
+        ./modules/configuration-minimal.nix
         ./hosts/scorpia/configuration.nix
         ./hosts/scorpia/network-and-virt.nix
         ./modules/plasma-kerneldrv.nix
@@ -145,6 +149,7 @@
       modules = [
 
         # Machine config
+        ./modules/configuration-minimal.nix
         ./hosts/dad-desktop/configuration.nix
         ./hosts/dad-desktop/network-and-virt.nix
         ./modules/plasma-kerneldrv.nix
