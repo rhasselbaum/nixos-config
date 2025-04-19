@@ -34,7 +34,7 @@ in
     gpg_key_id: CHANGEME
 
     # S3 bucket name and optional prefix in Duplicity URL format.
-    bucket_url: s3:///iris-backup
+    bucket_url: s3:///amethyst-backup
 
     # Create full backup if the last one is older than the specified period. Use Duplicity time format.
     full_if_older_than: 1M

@@ -63,16 +63,16 @@
       ];
     };
 
-    nixosConfigurations.iris = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.amethyst = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
 
         # Machine config
         ./modules/configuration-minimal.nix
-        ./hosts/iris/configuration.nix
-        ./hosts/iris/network-and-virt.nix
+        ./hosts/amethyst/configuration.nix
+        ./hosts/amethyst/network-and-virt.nix
         ./modules/plasma-nvidia.nix
-        ./hosts/iris/system-packages.nix
+        ./hosts/amethyst/system-packages.nix
 
         # Home Manager
         home-manager.nixosModules.home-manager
@@ -84,7 +84,7 @@
             ./modules/home-rob-minimal.nix
           ];
           home-manager.users.amy.imports = [
-            ./hosts/iris/home-amy.nix
+            ./hosts/amethyst/home-amy.nix
           ];
         }
       ];

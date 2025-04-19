@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-# Iris config
+# Amethyst config
 { config, lib, pkgs, inputs, ... }:
 let
   home-dir = "/home/amy";
@@ -20,7 +20,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Hello, my name is...
-  networking.hostName = "iris";
+  networking.hostName = "amethyst";
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
