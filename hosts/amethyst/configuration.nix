@@ -6,6 +6,7 @@
 { config, lib, pkgs, inputs, ... }:
 let
   home-dir = "/home/amy";
+  username = "amy";
 in
 {
   imports =
@@ -75,7 +76,7 @@ in
   # Syncthing
   services.syncthing = {
     enable = true;
-    user = "amy";
+    user = username;
     group = "users";
     dataDir = "${home-dir}/Share";
     configDir = "${home-dir}/.config/syncthing";
@@ -109,6 +110,12 @@ in
         };
       };
     };
+  };
+
+  # Auto login to Plasma
+  services.displayManager = {
+	  autoLogin.enable = true;
+	  autoLogin.user = username;
   };
 
 }
