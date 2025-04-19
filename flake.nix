@@ -22,7 +22,7 @@
     nixvirt.inputs.nixpkgs.follows = "nixpkgs";
 
     # Other pkgs
-    duplicity-unattended.url = "path:pkgs/duplicity-unattended";
+    duplicity-unattended.url = "github:rhasselbaum/duplicity-unattended/flake";
     duplicity-unattended.inputs.nixpkgs.follows = "nixpkgs";
     mqtt-launcher.url = "github:rhasselbaum/mqtt-launcher/flake";
     mqtt-launcher.inputs.nixpkgs.follows = "nixpkgs";
