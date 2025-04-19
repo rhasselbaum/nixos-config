@@ -20,9 +20,10 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 Copy the generated `hardware-configuration.nix` into the repo if needed and push it to Github. Then:
 
 ```bash
+sudo rm /mnt/etc/nixos/*
 sudo git clone https://github.com/rhasselbaum/nixos-config.git /mnt/etc/nixos
 cd /mnt/etc/nixos
-sudo nixos-install --flake /mnt/etc/nixos/flake.nix#<host>
+sudo nixos-install --flake /mnt/etc/nixos#<host>
 ```
 
 After reboot, log in as yourself. Then:

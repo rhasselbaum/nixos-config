@@ -65,24 +65,24 @@ in
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI
     settings = {
       devices = {
-        "iris" = { id = "VQ2GDTP-R4RSCSB-YVIOX5S-2NIBS76-GJ4G2UJ-DY2XSK3-EKR55K5-V6EDQAZ"; };
+        "amethyst" = { id = "BCSW2JN-AKNJEBN-2EGSF53-KS47DLJ-RRON7MV-5DBR34U-6ROMKHN-RQKRYQ3"; };
         "caprica" = { id = "HAINGKT-RK4NGP4-H4QXJ3O-X6UQRGE-IKOV6SH-R7BYHLM-W6UHWET-ORQOJAM"; };
       };
       folders = {
         "Commercial" = {
           path = "${home-dir}/Media/Commercial";
           id = "xhvo7-czpwr";
-          devices = [ "iris" "caprica" ];
+          devices = [ "amethyst" "caprica" ];
         };
         "Photos" = {
           path = "${home-dir}/Media/Photos";
           id = "ggjgv-w3jxr";
-          devices = [ "iris" "caprica" ];
+          devices = [ "amethyst" "caprica" ];
         };
         "Videos" = {
           path = "${home-dir}/Media/Videos";
           id = "7c7kw-h9ktz";
-          devices = [ "iris" "caprica" ];
+          devices = [ "amethyst" "caprica" ];
         };
       };
     };
