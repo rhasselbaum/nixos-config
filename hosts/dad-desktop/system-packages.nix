@@ -17,6 +17,7 @@
     pavucontrol
     flatpak
     gnome-software  # for Flatpak GUI installers
+    tmux
   ];
   nixpkgs.config.allowUnfree = true;
 
