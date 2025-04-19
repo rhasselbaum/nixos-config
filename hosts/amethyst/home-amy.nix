@@ -31,7 +31,7 @@ in
     ########################################################################
 
     # GnuPG key ID used for encryption and signing.
-    gpg_key_id: CHANGEME
+    gpg_key_id: C4F550686E3F518FC0AE4867E63BD16F2A426241
 
     # S3 bucket name and optional prefix in Duplicity URL format.
     bucket_url: s3:///amethyst-backup
