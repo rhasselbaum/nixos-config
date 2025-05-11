@@ -70,7 +70,7 @@
         # Machine config
         ./modules/configuration-minimal.nix
         ./hosts/amethyst/configuration.nix
-        ./hosts/amethyst/network-and-virt.nix
+        ./hosts/amethyst/network.nix
         ./modules/plasma-nvidia.nix
         ./hosts/amethyst/system-packages.nix
 
@@ -151,7 +151,7 @@
         # Machine config
         ./modules/configuration-minimal.nix
         ./hosts/dad-desktop/configuration.nix
-        ./hosts/dad-desktop/network-and-virt.nix
+        ./hosts/dad-desktop/network.nix
         ./modules/plasma-kerneldrv.nix
         ./hosts/dad-desktop/system-packages.nix
 
@@ -167,5 +167,30 @@
         }
       ];
     };
+
+    nixosConfigurations.dad-laptop = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+
+        # Machine config
+        ./modules/configuration-minimal.nix
+        ./hosts/dad-laptop/configuration.nix
+        ./hosts/dad-laptop/network.nix
+        ./modules/plasma-kerneldrv.nix
+        ./hosts/dad-laptop/system-packages.nix
+
+        # Home Manager
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.rob.imports = [
+            ./modules/home-rob-minimal.nix
+          ];
+        }
+      ];
+    };
+
   };
 }
