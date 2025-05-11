@@ -78,9 +78,14 @@ in
     privateKeyFile = "${home-dir}/.wireguard/private.key";
     peers = [
       {
-        # Dad's PC
+        # Dad's desktop
         publicKey = "mqCIXjMQMYJUXIvKGQxlfXOajIvXDKnRsd1REIvQS3U=";
         allowedIPs = [ "192.168.124.2/32" ];
+      }
+      {
+        # Dad's laptop
+        publicKey = "ykQuzCTGXNOFv2Nif7zNSA8rhNlNnZE3HPn376Ywfz8=";
+        allowedIPs = [ "192.168.124.3/32" ];
       }
     ];
   };
