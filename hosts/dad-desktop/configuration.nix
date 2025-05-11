@@ -111,17 +111,18 @@ in
     settings = {
       devices = {
         "dell-laptop" = { id = "2R6FDQE-OFOXWQC-PO7BO4W-6TGFCU6-6UQTQAU-2DFIIQU-UUCTEGP-XCILIQP"; };
+        "dad-laptop" = { id = "H6QOK27-A2DTS55-BLKLMWJ-7244YEE-JR52KVD-SSP2DLK-APRERSA-QCGRSAO"; };
       };
       folders = {
         "Documents" = {
           path = "${home-dir}/Documents";
           id = "ywowf-3v9uc";
-          devices = [ "dell-laptop" ];
+          devices = [ "dell-laptop" "dad-laptop" ];
         };
         "Downloads" = {
           path = "${home-dir}/Downloads";
           id = "zjfrj-jxtqq";
-          devices = [ "dell-laptop" ];
+          devices = [ "dell-laptop" "dad-laptop" ];
         };
       };
     };
