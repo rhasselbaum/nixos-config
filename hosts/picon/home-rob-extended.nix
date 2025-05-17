@@ -5,7 +5,7 @@
   programs.snapcast-caprica = {
     enable = true;
     soundcard = "Headphones";
-    latency = 110;
+    latency = 125;
   };
   # Link/unlink Pipewire default audio output device monitor to Snapcast.
   home.file.".mqtt-launcher/launcher.conf.d/20-topics".text = ''
