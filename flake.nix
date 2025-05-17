@@ -98,7 +98,7 @@
         ./modules/configuration-minimal.nix
         ./modules/configuration-pi4-speaker.nix
         ./hosts/aquaria/configuration.nix
-        ./hosts/aquaria/system-packages-pi4-speaker.nix
+        ./modules/system-packages-pi4-speaker.nix
 
         # Home Manager
         home-manager.nixosModules.home-manager
