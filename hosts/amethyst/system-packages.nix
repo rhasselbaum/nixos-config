@@ -9,7 +9,7 @@
     firefox
     google-chrome
     qt5.qtwayland # Needed for Vivaldi at least
-    signal-desktop-source
+    signal-desktop
     zoom-us
     duplicity
     gnupg

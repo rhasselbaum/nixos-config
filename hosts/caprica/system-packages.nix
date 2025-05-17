@@ -19,7 +19,7 @@
     (python3.withPackages (p: with p; [ black ]))
     buildah
     passt # Network support for buildah
-    signal-desktop-source
+    signal-desktop
     vscode
     zoom-us
     duplicity
