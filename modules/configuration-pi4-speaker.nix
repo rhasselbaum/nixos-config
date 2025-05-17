@@ -9,10 +9,6 @@ let
   username = "rob";
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
 
   # Use the extlinux boot loader for Raspberry Pi
   boot.loader.grub.enable = false;
