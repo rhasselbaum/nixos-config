@@ -116,6 +116,32 @@
       ];
     };
 
+    nixosConfigurations.picon = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+
+        # Machine config
+        ./modules/configuration-minimal.nix
+        ./modules/configuration-pi4-speaker.nix
+        ./hosts/picon/configuration.nix
+        ./modules/system-packages-pi4-speaker.nix
+
+        # Home Manager
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.rob.imports = [
+            ./modules/home-rob-minimal.nix
+            ./modules/home-rob-snapcast-client.nix
+            ./hosts/picon/home-rob-extended.nix
+            ./modules/home-rob-mqtt-launcher.nix
+          ];
+        }
+      ];
+    };
+
     nixosConfigurations.scorpia = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
