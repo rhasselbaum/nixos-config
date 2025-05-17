@@ -3,11 +3,11 @@
     "common-homeenv": {
       "flake": false,
       "locked": {
-        "lastModified": 1745084263,
-        "narHash": "sha256-bPaW8xJUo/UzFCLrxoRWfsYB0hxLy52oh4R0QVFBd7k=",
+        "lastModified": 1747501237,
+        "narHash": "sha256-WbPzX/g5EVUMXW4OF/3MF7aN4kKKx1EA7NYhqV1j7mg=",
         "owner": "rhasselbaum",
         "repo": "homeenv",
-        "rev": "8d0b36eaec51dd3706825f40a68b4739d7aa087c",
+        "rev": "ce07c5884b7911a3a1df412889102f953c2ddb59",
         "type": "github"
       },
       "original": {
