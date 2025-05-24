@@ -128,6 +128,10 @@ in
           "start": [ 'systemctl', '--user', 'start', 'snapcast-caprica.service' ],
           "stop": [ 'systemctl', '--user', 'stop', 'snapcast-caprica.service' ],
         },
+        "home-audio/snapcast/kitchen/stream-control": {
+          "start": [ 'systemctl', '--user', 'start', 'snapcast-caprica.service' ],
+          "stop": [ 'systemctl', '--user', 'stop', 'snapcast-caprica.service' ],
+        },
     }
   '';
 
