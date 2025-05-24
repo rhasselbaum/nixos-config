@@ -14,6 +14,7 @@
     gst_all_1.gst-plugins-good
     snapcast
     tmux
+    raspberrypi-eeprom
   ];
   nixpkgs.config.allowUnfree = true;
 
