@@ -52,7 +52,15 @@ in
     enable = true;
     # Follow https://www.home-assistant.io/installation/linux for setup
   };
-  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
+  virtualisation.libvirtd.qemu = {
+    package = pkgs.qemu_kvm;
+    # Without this, "libvirt-guests" fails to autostart guests, giving a Spice socket error.
+    # See https://www.reddit.com/r/archlinux/comments/n1ra5y/vm_always_fails_to_start_but_starts_if_tried/
+    verbatimConfig = ''
+      spice_listen = "::1"
+    '';
+  };
+
   programs.virt-manager.enable = true;
 
   # Open ports in the firewall.
