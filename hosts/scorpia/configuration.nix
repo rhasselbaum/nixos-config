@@ -54,6 +54,19 @@ in
     };
   };
 
+  # Reboot if Internet connectivity is lost for 10 minutes. This is temporary until I figure
+  # out why the bridge interface seems to fail a couple times a week.
+  systemd.services.network-or-bust = {
+    description = "network-or-bust";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${inputs.host-tools.defaultPackage.${pkgs.system}}/bin/network-or-bust";
+      Restart = "no";  # don't be a hero if thing's go sideways
+    };
+  };
+
   # Syncthing
   services.syncthing = {
     enable = true;

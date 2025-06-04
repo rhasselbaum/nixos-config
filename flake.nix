@@ -30,6 +30,8 @@
     polychromatic-tools.inputs.nixpkgs.follows = "nixpkgs";
     snapcast-tools.url = "github:rhasselbaum/snapcast-tools";
     snapcast-tools.inputs.nixpkgs.follows = "nixpkgs";
+    host-tools.url = "github:rhasselbaum/host-tools";
+    host-tools.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, nixvirt, ... }@inputs:
