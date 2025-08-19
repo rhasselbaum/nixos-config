@@ -91,7 +91,7 @@ in
   };
 
   # Open ports in the firewall.
-  networking.firewall.trustedInterfaces = [ libvirt_sandbox_dev ]; # Allow traffic on the container sandbox bridge.
+  networking.firewall.trustedInterfaces = [ libvirt_sandbox_dev libvirt_nat_bridge_dev ]; # Allow traffic on the container sandbox bridge.
   networking.firewall.allowedTCPPorts = [
     22    # SSH
     22000 # Syncthing
