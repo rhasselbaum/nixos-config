@@ -6,8 +6,9 @@
     vim
     git
     wget
-    # Weird Vivaldi stuff needed for Plasma Wayland. See https://github.com/NixOS/nixpkgs/pull/292148
+    # Weird Vivaldi stuff needed for Plasma Wayland. See https://github.com/NixOS/nixpkgs/pull/292148 and wiki.
     # Also, go to vivaldi://flags and set Ozone to Wayland. See https://discuss.kde.org/t/plasma-6-and-screen-flickering-in-vivaldi/10999
+    # If that doesn't solve flickering, try toggling "Use Hardware Acceleration When Available". See https://discourse.nixos.org/t/flickering-vivaldi-7-5-on-plasma-wayland-with-nvidia
     (vivaldi.overrideAttrs (oldAttrs: {
       dontWrapQtApps = false;
       dontPatchELF = true;
