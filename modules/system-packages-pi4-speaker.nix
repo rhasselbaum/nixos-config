@@ -15,6 +15,7 @@
     snapcast
     tmux
     raspberrypi-eeprom  # sudo rpi-eeprom-update -d -a
+    mpc # client for MPD
   ];
   nixpkgs.config.allowUnfree = true;
 

@@ -22,6 +22,7 @@ in
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     22    # SSH
+    6600  # MPD
   ];
 
   # Enable audio devices
@@ -49,6 +50,34 @@ in
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDVklqPIhhFfoGuTU6hnur2sT8RHUZ5i4KZhmgevBl8Tzc/hcrDYUjylS2LCJbWeMyhldCDjgLjqIAj+X/azYHqT1sRa+xRfx50Q76FX3OxWsmGiYk/u/JRbBw226FpB474gjQkSXPGyjSM4gJB9wfc2nWj8riTa4cPuImMACdDoqFNxIiVWX+nJ9d+YWztOja6spFnP/KoFblfmPvm4tjS6R6OlajRhveeZSmiRrq/GbkOD8HbeXffGltVF8CSf1C1SIuCYZ+p4h7xkYbPyVGQyXfuLDLusWr0+H+1j7uhUT4XCwg3lQCScyGDhhwlTQRwFd7/MxqvED4Q03+I9zqtMeZ6mOHo1/LrncBEJcMVqSfC5tFS4nhvwo6IjhS7TzLkvh5CwAN3/63rNXSivFrfItPWOfE3mkOI7iNFacJqbXNdht+R3jaWYGUh6uCzmn/0YwJ7yuvm1I3Tbpf6A57TJX7RAHI0pU+F81m58xsmHNJQm9QSbPs6W8OPZadkD/Id8JZPkEy7ktdfOy1TzDVZMnGC+JkumYkB2yFF36xu909vPtLZ/Ncu7ffCcPpx9GCsP6KKpWqNTrD4teNta6jn2VKREuxz3Vk5nfJRp8WgBBla/1kUse8tw3LykMiQS6f8uFGb7459dBeDFnbg6ifM9TtYVW31PiKpJgf5z2pWUw== rob@caprica"
     ];
+  };
+
+  # MPD
+  services.mpd = {
+    user = username;
+    enable = true;
+    musicDirectory = "${home-dir}/Music";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "Pipewire Output"
+      }
+    '';
+    network.listenAddress = "any"; # Bind to all interfaces (default port 6600)
+    startWhenNeeded = true; # Only start when socket is connected
+  };
+
+  # Special MPD config to use the Pipewire session owned by ${username}.
+  # Their UID isn't known until runtime so need a preStart script to generate
+  # the environment file.
+  systemd.services.mpd = {
+    # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+    preStart = ''
+      ${pkgs.writeShellScript "gen-env.sh" ''
+        echo XDG_RUNTIME_DIR="/run/user/$(id -u ${username})" > $1
+      ''} /run/mpd/mpd-service.env
+    '';
+    serviceConfig.EnvironmentFile = "-/run/mpd/mpd-service.env";
   };
 
   # SSH
