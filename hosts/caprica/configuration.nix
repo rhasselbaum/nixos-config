@@ -111,17 +111,14 @@ in
     };
   };
 
-  # Snapcast
+  # # Snapcast
   services.snapserver = {
     enable = true;
-    buffer = 2000;
     openFirewall = true;
-    codec = "flac";
-    streams = {
-      dispatch  = {
-        type = "pipe";
-        location = "/run/snapserver/dispatch";
-      };
+    settings.stream = {
+      buffer = 2000;
+      codec = "flac";
+      source = "pipe:///run/snapserver/dispatch?name=dispatch";
     };
   };
 
