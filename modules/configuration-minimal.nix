@@ -1,6 +1,5 @@
 # Minimal system configuration shared across all hosts.
 
-# Aquaria config
 { config, lib, pkgs, inputs, ... }:
 {
   # Enable Flakes support
@@ -11,6 +10,9 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
+  # Sync time across hosts.
+  services.ntp.enable = true;
 
   # Nix Store garbage collection
   nix.gc = {
