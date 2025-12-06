@@ -95,7 +95,7 @@ in
         Restart = "no";
         ExecStart = ''
           ${pkgs.coreutils}/bin/timeout --preserve-status 250m \
-            ${inputs.snapcast-tools.defaultPackage.${pkgs.system}}/bin/pw-snapcast-link
+            ${inputs.snapcast-tools.defaultPackage.${pkgs.stdenv.hostPlatform.system}}/bin/pw-snapcast-link
         '';
       };
     };
@@ -110,7 +110,7 @@ in
       Service = {
         Type = "exec";
         Restart = "no";
-        ExecStart = "${inputs.polychromatic-tools.defaultPackage.${pkgs.system}}/bin/polychromatic-restore";
+        ExecStart = "${inputs.polychromatic-tools.defaultPackage.${pkgs.stdenv.hostPlatform.system}}/bin/polychromatic-restore";
       };
       Install.WantedBy = [ "default.target" "suspend.target" "hibernate.target" "hybrid-sleep.target" ];
     };

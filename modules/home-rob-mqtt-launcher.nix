@@ -63,7 +63,7 @@ in
     Service = {
       Type = "exec";
       Environment = "MQTTLAUNCHERCONFIG=${main-conf-file}";
-      ExecStart = "${inputs.mqtt-launcher.defaultPackage.${pkgs.system}}/bin/mqtt-launcher";
+      ExecStart = "${inputs.mqtt-launcher.defaultPackage.${pkgs.stdenv.hostPlatform.system}}/bin/mqtt-launcher";
       Restart = "always";
       RestartSec = "10s";
     };

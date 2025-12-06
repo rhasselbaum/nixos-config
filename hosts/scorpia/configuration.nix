@@ -62,7 +62,7 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${inputs.host-tools.defaultPackage.${pkgs.system}}/bin/network-or-bust";
+      ExecStart = "${inputs.host-tools.defaultPackage.${pkgs.stdenv.hostPlatform.system}}/bin/network-or-bust";
       Restart = "no";  # don't be a hero if thing's go sideways
     };
   };
