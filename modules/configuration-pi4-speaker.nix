@@ -22,7 +22,6 @@ in
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     22    # SSH
-    6600  # MPD
   ];
 
   # Enable audio devices
@@ -56,15 +55,18 @@ in
   services.mpd = {
     user = username;
     enable = true;
-    musicDirectory = "${home-dir}/Music";
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "Pipewire Output"
-      }
-    '';
-    network.listenAddress = "any"; # Bind to all interfaces (default port 6600)
+    settings = {
+      audio_output = [
+        {
+          type = "pipewire";
+          name = "Pipewire Output";
+        }
+      ];
+      bind_to_address =  "any"; # Bind to all interfaces (default port 6600)
+      musicDirectory = "${home-dir}/Music";
+    };
     startWhenNeeded = true; # Only start when socket is connected
+    openFirewall = true;
   };
 
   # Special MPD config to use the Pipewire session owned by ${username}.
