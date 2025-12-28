@@ -63,7 +63,7 @@ in
         }
       ];
       bind_to_address =  "any"; # Bind to all interfaces (default port 6600)
-      musicDirectory = "${home-dir}/Music";
+      music_directory = "${home-dir}/Music";
     };
     startWhenNeeded = true; # Only start when socket is connected
     openFirewall = true;
