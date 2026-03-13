@@ -30,7 +30,7 @@
     vlc
     gimp
     pavucontrol
-    helvum
+    crosspipe
     ffmpeg
     snapcast
     gst_all_1.gstreamer
@@ -49,6 +49,8 @@
     nmap
     openrazer-daemon
     polychromatic
+    opencode
+    opencode-desktop
   ];
   nixpkgs.config.allowUnfree = true;
 
