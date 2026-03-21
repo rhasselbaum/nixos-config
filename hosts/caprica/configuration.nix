@@ -14,6 +14,7 @@ in
       ./hardware-configuration.nix
       "${inputs.disko}/module.nix"
       ./disk-config.nix
+      ../../modules/printing.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -37,15 +38,6 @@ in
     ];
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  # Local printer discovery.
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
@@ -60,17 +52,6 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # SSH
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      AllowUsers = [username];
-      PermitRootLogin = "no";
-    };
-  };
 
   # Syncthing
   services.syncthing = {

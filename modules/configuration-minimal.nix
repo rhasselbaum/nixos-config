@@ -21,6 +21,17 @@
     options = "--delete-older-than 60d";
   };
 
+  # SSH: key-only auth, no root login
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      AllowUsers = [ "rob" ];
+      PermitRootLogin = "no";
+    };
+  };
+
   # Fish
   programs.fish.enable = true;
   programs.bash = {

@@ -1,4 +1,4 @@
-# Plasma, Wayland, and Intel or AMD, basically.
+# Common Plasma 6, Wayland, SDDM, and Pipewire setup shared by all desktop GPU modules.
 { config, lib, pkgs, ... }:
 {
 
