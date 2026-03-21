@@ -21,7 +21,6 @@
     buildah
     passt # Network support for buildah
     signal-desktop
-    vscode
     zoom-us
     duplicity
     gnupg
@@ -49,8 +48,14 @@
     nmap
     openrazer-daemon
     polychromatic
-    opencode
-    opencode-desktop
+    claude-code
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        anthropic.claude-code
+        ms-python.python
+        bbenoist.nix
+      ];
+    })
   ];
   nixpkgs.config.allowUnfree = true;
 
