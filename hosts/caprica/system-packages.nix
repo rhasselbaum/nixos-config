@@ -56,6 +56,7 @@
         bbenoist.nix
       ];
     })
+    opencode
   ];
   nixpkgs.config.allowUnfree = true;
 
