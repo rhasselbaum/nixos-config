@@ -51,7 +51,6 @@
     claude-code
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
-        anthropic.claude-code
         ms-python.python
         bbenoist.nix
       ];
