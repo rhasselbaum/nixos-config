@@ -25,7 +25,6 @@
     qemu
     vlc
     pavucontrol
-    helvum
   ];
   nixpkgs.config.allowUnfree = true;
 
