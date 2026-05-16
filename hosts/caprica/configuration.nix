@@ -81,7 +81,7 @@ in
         "Photos" = {
           path = "${home-dir}/Media/Photos";
           id = "ggjgv-w3jxr";
-          devices = [ "amethyst" "scorpia" ];
+          devices = [ "amethyst" ];
         };
         "Videos" = {
           path = "${home-dir}/Media/Videos";

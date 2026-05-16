@@ -76,11 +76,6 @@ in
           id = "xhvo7-czpwr";
           devices = [ "amethyst" "caprica" ];
         };
-        "Photos" = {
-          path = "${home-dir}/Media/Photos";
-          id = "ggjgv-w3jxr";
-          devices = [ "amethyst" "caprica" ];
-        };
         "Videos" = {
           path = "${home-dir}/Media/Videos";
           id = "7c7kw-h9ktz";
