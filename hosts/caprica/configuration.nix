@@ -65,7 +65,7 @@ in
     settings = {
       devices = {
         "amethyst" = { id = "BCSW2JN-AKNJEBN-2EGSF53-KS47DLJ-RRON7MV-5DBR34U-6ROMKHN-RQKRYQ3"; };
-        "scorpia" = { id = "LFPMCYX-7BA2OH5-3TCQF2S-Y3M4YUK-VVRY453-Q3R7POC-NQGKUTG-JAGYVQG"; };
+        "scorpia" = { id = "ABU3L6C-3ZK2XGW-LF7CLPR-IYMPJZU-AIHNRUI-MSL4BEL-JMV3ZC2-4IPJVQZ"; };
       };
       folders = {
         "Share" = {

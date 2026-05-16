@@ -4,7 +4,7 @@
 let
   nixvirt = inputs.nixvirt;
   bridge_dev = "br0";
-  eth_dev = "enp0s25";
+  eth_dev = "enp1s0";
 in
 {
   # Configure bridged networking for Home Assistant VM + physical Ethernet. We use
