@@ -56,7 +56,7 @@
       ];
     })
     opencode
-    btrfs-progs
+    e2fsprogs
   ];
   nixpkgs.config.allowUnfree = true;
 

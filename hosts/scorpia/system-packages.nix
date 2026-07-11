@@ -25,7 +25,7 @@
     qemu
     vlc
     pavucontrol
-    btrfs-progs
+    e2fsprogs
   ];
   nixpkgs.config.allowUnfree = true;
 
