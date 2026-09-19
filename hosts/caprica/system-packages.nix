@@ -57,6 +57,7 @@
     })
     opencode
     e2fsprogs
+    dig
   ];
   nixpkgs.config.allowUnfree = true;
 
