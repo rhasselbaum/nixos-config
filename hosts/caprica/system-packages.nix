@@ -46,8 +46,6 @@
     kdePackages.kdenlive
     kdePackages.kcalc
     nmap
-    openrazer-daemon
-    polychromatic
     claude-code
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
