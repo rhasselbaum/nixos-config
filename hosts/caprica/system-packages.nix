@@ -25,6 +25,7 @@
     duplicity
     gnupg
     inputs.duplicity-unattended.defaultPackage.x86_64-linux
+    inputs.host-tools.defaultPackage.x86_64-linux
     awscli2
     vlc
     gimp
